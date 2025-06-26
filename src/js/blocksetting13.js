@@ -17,7 +17,6 @@ import Position from '../js/outcome';
 // import Blank from '../js/template-js/blank';
 // import Position from '../js/template-js/outcome';
 
-
 import jsPsychHtmlbuttonResponse from '@jspsych/plugin-html-button-response';
 
 import { images } from '../lib/utils';
@@ -114,7 +113,7 @@ function assessPerformance() {
   let prediction_data = jsPsych.data.get().select('prediction').values;
   for (let i = 0; i < counter; i++) {
     i = counter - 1;
-    if (outcome_data[i] <= prediction_data[i] + 20 && outcome_data[i] >= prediction_data[i] - 20) {
+    if (outcome_data[i] <= prediction_data[i] + 25 && outcome_data[i] >= prediction_data[i] - 25) {
       score_array.push(1);
       score = Math.sum(score_array);
       jsPsych.data.addDataToLastTrial({ score });
@@ -131,7 +130,7 @@ function assessPractice() {
   let prediction_pr = jsPsych.data.get().select('prediction').values;
   for (let i = 0; i < pr_counter; i++) {
     i = pr_counter - 1;
-    if (outcome_pr[i] <= prediction_pr[i] + 20 && outcome_pr[i] >= prediction_pr[i] - 20) {
+    if (outcome_pr[i] <= prediction_pr[i] + 25 && outcome_pr[i] >= prediction_pr[i] - 25) {
       pr_score_array.push(1);
       pr_score = Math.sum(pr_score_array);
       jsPsych.data.addDataToLastTrial({ pr_score });
@@ -208,7 +207,7 @@ function practice_block(timeline, jsPsych) {
         const fullTime = jsPsych.data.get().select('prediction').count();
         const shield_m = jsPsych.data.get().select('prediction').values[fullTime - 1];
         $('#picker').css('transform', 'rotate(' + shield_m + 'deg)');
-        $('#shield').css('transform', 'rotate(' + (shield_m + 20) + 'deg) skewX(-50deg)');
+        $('#shield').css('transform', 'rotate(' + (shield_m + 25) + 'deg) skewX(-40deg)');
         $('#counter').text(31 - n);
         $('#picker-circle').css('background-color', colorStyleP);
         $('#pickerOutcome').css('transform', 'rotate(' + outcome + 'deg)');
@@ -295,7 +294,7 @@ function block1(timeline, jsPsych) {
         const fullTime = jsPsych.data.get().select('prediction').count();
         const shield_m = jsPsych.data.get().select('prediction').values[fullTime - 1];
         $('#picker').css('transform', 'rotate(' + shield_m + 'deg)');
-        $('#shield').css('transform', 'rotate(' + (shield_m + 20) + 'deg) skewX(-50deg)');
+        $('#shield').css('transform', 'rotate(' + (shield_m + 25) + 'deg) skewX(-40deg)');
         $('#counter').text(201 - n);
         $('#picker-circle').css('background-color', colorStyle);
         $('#pickerOutcome').css('transform', 'rotate(' + outcome + 'deg)');
@@ -422,7 +421,7 @@ function block3(timeline, jsPsych) {
         const fullTime = jsPsych.data.get().select('prediction').count();
         const shield_m = jsPsych.data.get().select('prediction').values[fullTime - 1];
         $('#picker').css('transform', 'rotate(' + shield_m + 'deg)');
-        $('#shield').css('transform', 'rotate(' + (shield_m + 20) + 'deg) skewX(-50deg)');
+        $('#shield').css('transform', 'rotate(' + (shield_m + 25) + 'deg) skewX(-40deg)');
         $('#counter').text(201 - n);
         $('#picker-circle').css('background-color', colorStyle3);
         $('#pickerOutcome').css('transform', 'rotate(' + outcome + 'deg)');
@@ -608,7 +607,7 @@ function block6() {
         const fullTime = jsPsych.data.get().select('prediction').count();
         const shield_m = jsPsych.data.get().select('prediction').values[fullTime - 1];
         $('#picker').css('transform', 'rotate(' + shield_m + 'deg)');
-        $('#shield').css('transform', 'rotate(' + (shield_m + 20) + 'deg) skewX(-50deg)');
+        $('#shield').css('transform', 'rotate(' + (shield_m + 25) + 'deg) skewX(-40deg)');
         $('#counter').text(201 - n);
         $('#picker-circle').css('background-color', colorStyle6);
         $('#pickerOutcome').css('transform', 'rotate(' + outcome + 'deg)');

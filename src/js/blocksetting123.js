@@ -2,19 +2,18 @@ import { initJsPsych } from 'jspsych';
 const jsPsych = initJsPsych();
 
 import $ from 'jquery';
-import * as Math from 'mathjs';
-
+import Math from 'mathjs';
 // js-template but does not wokr
 import Click from '../js/prediction';
 import Blank from '../js/blank';
 import Position from '../js/outcome';
-import jsPsychHtmlbuttonResponse from '@jspsych/plugin-html-button-response';
+import jsPsychHtmlButtonResponse from '@jspsych/plugin-html-button-response';
 
 import { images } from '../lib/utils';
 
 // design
 const n_TrialPerBlock = 200;
-const n_TrialPractice = 30;
+const n_TrialPractice = 25; // FIX THIS !11
 const n_SamePosition = 7;
 const n_MaxJitter = 4; // 7-11, avg of 9
 const rtDeadline = 15000;
@@ -35,7 +34,9 @@ function GenerateJitter(TrialPerBlock, MaxJitter) {
 const colors = jsPsych.randomization.shuffle(all_colors);
 
 //colors for practice block
-let colorP1 = '#ca9161'; // change color choosing so not same as in main blocks?
+let colorP0 = '#0173b2'; // same color as shown in instructions
+let colorP1 = '#ca9161'; // color chosen so not as same as main blocks
+
 const colorsP2 = ['#fbafe4', '#56b4e9'];
 let colorP2 = colorsP2;
 for (let h = 0; h < n_TrialPractice; h++) {
@@ -104,6 +105,9 @@ function normalRandomScaled(mean, stddev) {
   return r;
 }
 // make pseudo random position
+const numsPrac1_1 = angle_array();
+const numsPrac2_1 = angle_array();
+const numsPrac2_2 = angle_array();
 const nums1 = angle_array();
 const nums2_1 = angle_array();
 const nums2_2 = angle_array();
@@ -135,7 +139,7 @@ function assessPerformance(prediction, outcome) {
   // min distance around the circle in degrees
   let pred_err_min = Math.min(Math.mod(pred_err, 360), Math.mod(-pred_err, 360));
   let hit = 0;
-  if (pred_err_min <= 20) {
+  if (pred_err_min <= 25) {
     console.log('hit');
     hit = 1;
     //jsPsych.data.addDataToLastTrial({ score });
@@ -153,6 +157,221 @@ function assessPerformance(prediction, outcome) {
 /***
  *practice block n < n_TrialPractice + 1
  */
+function practice_block0(timeline, jsPsych) {
+  let n_TrialPractice1 = 10;
+  let trial_type_label = 'practice';
+  let updateThreshold = 15; // if they are updating more than this, they are not doing well
+  let minUpdateCount = 7; // number of trials that must be below updateThreshold
+  let updates = [];
+  let predictions = [];
+  let outcomes = [279.38, 246.37, 263.16, 254.01, 274.34, 280.86, 282.78, 306.51, 252.68, 286.5];
+  let totalScore = 0;
+
+  for (let n = 1; n < n_TrialPractice1 + 1; n++) {
+    const colorStyleP = colorP0;
+    let prediction;
+    let outcome;
+    let mean;
+    let score;
+    //ENSURE THERE ARE examples of highly noisy outcomes
+    //even though they are aiming in the right place, will not catch every zombie
+    outcome = outcomes[n - 1];
+    mean = 270;
+    console.log(colorStyleP);
+    console.log(mean);
+    console.log(outcome);
+    var make_prediction = {
+      type: Click,
+      on_load: function () {
+        $('#counter').text(n_TrialPractice1 + 1 - n);
+        $('#center-circle').css('background-color', colorStyleP);
+        $('#circle').on('click', function (event) {
+          if (event.target == this) {
+            $('#center-circle').css('background-color', '#A9A9A9');
+          }
+        });
+        if ($('#arrow').length === 0) {
+          $('body').append('<div id="arrow"></div>');
+        }
+        if ($('#arrow-tail').length === 0) {
+          $('body').append('<div id="arrow-tail"></div>');
+        }
+        $('#arrow').css('border-top-color', colorStyleP);
+        $('#arrow-tail').css('background-color', colorStyleP);
+      },
+      on_finish: function () {
+        let pred_idx = jsPsych.data.get().select('prediction').count();
+        prediction = jsPsych.data.get().select('prediction').values[pred_idx - 1];
+        predictions.push(prediction);
+      },
+    };
+
+    var blank = {
+      type: Blank,
+      on_load: function () {
+        $('#counter').text(n_TrialPractice1 + 1 - n);
+      },
+    };
+
+    var observe_outcome = {
+      type: Position,
+      data: { type: trial_type_label },
+      on_load: function () {
+        $('#shield').toggle(true);
+        $('#picker').css('transform', 'rotate(' + prediction + 'deg)');
+        $('#shield').css('transform', 'rotate(' + (prediction + 25) + 'deg) skewX(-40deg)');
+        $('#counter').text(n_TrialPractice1 + 1 - n);
+        $('#picker-circle').css('background-color', colorStyleP);
+        $('#pickerOutcome').css('transform', 'rotate(' + outcome + 'deg)');
+      },
+      on_finish: function (data) {
+        data.outcome = outcome;
+        data.mean = mean;
+        data.color = colorStyleP;
+        score = assessPerformance(prediction, outcome);
+        // Store updated totalScore back into jsPsych.data
+        data.score = score;
+        totalScore += score;
+        outcomes[n - 1] = outcome; // store outcomes for later
+        if (n > 1) {
+          let update = Math.abs(predictions[n - 1] - predictions[n - 2]);
+          update = Math.min(Math.abs(update), 360 - Math.abs(update));
+          updates.push(update);
+          console.log('update between predictions', update);
+          // or do I want to do actual update
+        }
+      },
+    };
+    var practice = {
+      timeline: [make_prediction, blank, observe_outcome],
+    };
+    timeline.push(practice);
+  }
+  var checkPerformance = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: function () {
+      $('#arrow').remove();
+      $('#arrow-tail').remove();
+      let sufficientUpdates = updates.filter((u) => u <= updateThreshold).length;
+      console.log('updates', updates);
+      if (sufficientUpdates >= 9) {
+        return `<div style= "line-height:1.75;">
+        <p>Great job! You got ${totalScore} out of 10 possible points in this block.</p>
+        <p style = "text-align: center;">
+        <br>Hitting <b> 9 out of 10 zombies </b> means that you used the best possible strategy for this block.
+        <br>The zombies stagger unpredictably, so <u>it is not always possible to hit every zombie</u>.
+        <br> You can proceed to the next practice.</p></div>`;
+      } else if (sufficientUpdates >= minUpdateCount) {
+        return `<div style= "line-height:1.75;">
+        <p>Great job! You got <b>${totalScore} out of 10</b> possible points in this block.</p>
+        <p>
+        The zombies stagger unpredictably, so <u>it is not always possible to hit every zombie.</u>
+        <br> You can proceed to the next practice.</p></div>`;
+        //could include, "refining your strategy may result in more hits, but a perfect score in not expected"
+      } else {
+        return `<div><p>Sorry, you did not correctly aim to capture as many zombies as possible.</p>
+        <p>Remember, the zombies preferred attack location is represented by the arrow. </p>
+        <p>Please try again.</p></div>`;
+      }
+    },
+    choices: function () {
+      let sufficientUpdates = updates.filter((u) => u <= updateThreshold).length;
+      return sufficientUpdates >= minUpdateCount ? ['Continue'] : ['Try Again'];
+    },
+    on_finish: function (data) {
+      //let totalScore = jsPsych.data.get().last(1).values()[0].totalScore;
+      $('#arrow').remove();
+      $('#arrow-tail').remove();
+
+      let sufficientUpdates = updates.filter((u) => u <= updateThreshold).length;
+      console.log('sufficientUpdates', sufficientUpdates);
+      data.repeatPractice = sufficientUpdates < minUpdateCount;
+      data.instructionAttempts += data.repeatPractice ? 1 : 0;
+      updates = []; // reset updates for next practice block'
+      predictions = []; // reset predictions for next practice block
+      totalScore = 0;
+    },
+  };
+  timeline.push(checkPerformance);
+}
+
+//FOR PRACTICE BLOCK 0 LOOPING
+function getPracticeBlock0Timeline(jsPsych) {
+  let timeline = [];
+  practice_block0(timeline, jsPsych);
+  return timeline;
+}
+
+/***
+ *practice block n < n_TrialPractice + 1
+ */
+function practice_block01(timeline, jsPsych) {
+  let n_TrialPractice1 = 10;
+  let trial_type_label = 'practice';
+  //jsPsych.data.addDataToLastTrial({ totalScore: 0 });  // Initialize totalScore at the start
+  for (let n = 1; n < n_TrialPractice1 + 1; n++) {
+    const colorStyleP = colorP1; // same color as pblock 1.. sus?
+    let prediction;
+    let outcome;
+    let mean;
+    let score;
+    // no changepoint logic here
+    mean = 120; //Math.floor(Math.random() * 360);
+    outcome = Math.mod(normalRandomScaled(mean, 20), 360);
+
+    console.log(colorStyleP);
+    console.log(mean);
+    console.log(outcome);
+    var make_prediction = {
+      type: Click,
+      on_load: function () {
+        $('#counter').text(n_TrialPractice1 + 1 - n);
+        $('#center-circle').css('background-color', colorStyleP);
+        $('#circle').on('click', function (event) {
+          if (event.target == this) {
+            $('#center-circle').css('background-color', '#A9A9A9');
+          }
+        });
+      },
+      on_finish: function () {
+        let pred_idx = jsPsych.data.get().select('prediction').count();
+        prediction = jsPsych.data.get().select('prediction').values[pred_idx - 1];
+      },
+    };
+
+    var blank = {
+      type: Blank,
+      on_load: function () {
+        $('#counter').text(n_TrialPractice1 + 1 - n);
+      },
+    };
+
+    var observe_outcome = {
+      type: Position,
+      data: { type: trial_type_label },
+      on_load: function () {
+        $('#shield').toggle(true);
+        $('#picker').css('transform', 'rotate(' + prediction + 'deg)');
+        $('#shield').css('transform', 'rotate(' + (prediction + 25) + 'deg) skewX(-40deg)');
+        $('#counter').text(n_TrialPractice1 + 1 - n);
+        $('#picker-circle').css('background-color', colorStyleP);
+        $('#pickerOutcome').css('transform', 'rotate(' + outcome + 'deg)');
+      },
+      on_finish: function (data) {
+        data.outcome = outcome;
+        data.mean = mean;
+        data.color = colorStyleP;
+        score = assessPerformance(prediction, outcome);
+        data.score = score;
+      },
+    };
+    var practice = {
+      timeline: [make_prediction, blank, observe_outcome],
+    };
+    timeline.push(practice);
+  }
+}
+
 function practice_block1(timeline, jsPsych) {
   let counterP_1 = 0;
   let c1 = 0;
@@ -160,6 +379,7 @@ function practice_block1(timeline, jsPsych) {
   let trial_type_label = 'practice';
 
   for (let n = 1; n < n_TrialPractice + 1; n++) {
+    //let n = 1;
     const colorStyleP = colorP1;
     var x1;
     let prediction;
@@ -174,13 +394,12 @@ function practice_block1(timeline, jsPsych) {
       c1++;
     }
     if (counterP_1 === 1) {
-      x1 = nums2_1[n];
+      x1 = numsPrac1_1[n]; // this generates the random number 1 -359
     }
     if (counterP_1 !== 1) {
       // x1 = x1
     }
-    // make task slightly easier for practicing with lower noise stdev -- CHANGED SO NOT TRUE (REALISTIC TO TASK)
-    outcome = Math.mod(normalRandomScaled(x1, 20), 360);
+    outcome = Math.mod(normalRandomScaled(x1, 20), 360); //x1 = mean, 20 = stdev
     mean = x1;
     console.log(colorStyleP);
     console.log(mean);
@@ -218,7 +437,7 @@ function practice_block1(timeline, jsPsych) {
       on_load: function () {
         $('#shield').toggle(true);
         $('#picker').css('transform', 'rotate(' + prediction + 'deg)');
-        $('#shield').css('transform', 'rotate(' + (prediction + 20) + 'deg) skewX(-50deg)');
+        $('#shield').css('transform', 'rotate(' + (prediction + 25) + 'deg) skewX(-40deg)');
         $('#counter').text(n_TrialPractice + 1 - n);
         $('#picker-circle').css('background-color', colorStyleP);
         $('#pickerOutcome').css('transform', 'rotate(' + outcome + 'deg)');
@@ -262,7 +481,7 @@ function practice_block2(timeline, jsPsych) {
         c1++;
       }
       if (counterP_1 === 1) {
-        x1 = nums2_1[n];
+        x1 = numsPrac2_1[n];
       }
       if (counterP_1 !== 1) {
         // x1 = x1
@@ -285,7 +504,7 @@ function practice_block2(timeline, jsPsych) {
         c2++;
       }
       if (counterP_2 === 1) {
-        x2 = nums2_2[n];
+        x2 = numsPrac2_2[n];
       }
       if (counterP_2 !== 1) {
         // x2 = x2
@@ -330,7 +549,7 @@ function practice_block2(timeline, jsPsych) {
       on_load: function () {
         $('#shield').toggle(true);
         $('#picker').css('transform', 'rotate(' + prediction + 'deg)');
-        $('#shield').css('transform', 'rotate(' + (prediction + 20) + 'deg) skewX(-50deg)');
+        $('#shield').css('transform', 'rotate(' + (prediction + 25) + 'deg) skewX(-40deg)');
         $('#counter').text(n_TrialPractice + 1 - n);
         $('#picker-circle').css('background-color', colorStyleP);
         $('#pickerOutcome').css('transform', 'rotate(' + outcome + 'deg)');
@@ -354,8 +573,8 @@ function practice_block2(timeline, jsPsych) {
  *****/
 function block1(timeline, jsPsych) {
   var block1_intro = {
-    type: jsPsychHtmlbuttonResponse,
-    stimulus: `<div><img src=${images['zombie.png']} style='top:20%; left: 10% ;height:300px;width: 300px'><p>In this block, you will face one group of zombies.</p></div>`,
+    type: jsPsychHtmlButtonResponse,
+    stimulus: `<div><img src=${images['zombie.png']} style='top:20%; left: 10% ;height:300px;width: auto'><p>In this block, you will face one group of zombies.</p></div>`,
     choices: ['Start'],
   };
   timeline.push(block1_intro);
@@ -417,7 +636,7 @@ function block1(timeline, jsPsych) {
       on_load: function () {
         $('#shield').toggle(true);
         $('#picker').css('transform', 'rotate(' + prediction + 'deg)');
-        $('#shield').css('transform', 'rotate(' + (prediction + 20) + 'deg) skewX(-50deg)');
+        $('#shield').css('transform', 'rotate(' + (prediction + 25) + 'deg) skewX(-40deg)');
         $('#counter').text(n_TrialPerBlock + 1 - n);
         $('#picker-circle').css('background-color', colorStyle);
         $('#pickerOutcome').css('transform', 'rotate(' + outcome + 'deg)');
@@ -441,8 +660,8 @@ function block1(timeline, jsPsych) {
  ***/
 function block2(timeline, jsPsych, sync_cp = true) {
   var block2_intro = {
-    type: jsPsychHtmlbuttonResponse,
-    stimulus: `<div><img src=${images['zombie.png']} style='top:20%; left: 10% ;height:300px;width: 300px'><p>In this block, you will face two groups of zombies.</p></div>`,
+    type: jsPsychHtmlButtonResponse,
+    stimulus: `<div><img src=${images['zombie.png']} style='top:20%; left: 10% ;height:300px;width: auto'><p>In this block, you will face two groups of zombies.</p></div>`,
     choices: ['Start'],
   };
   timeline.push(block2_intro);
@@ -535,7 +754,7 @@ function block2(timeline, jsPsych, sync_cp = true) {
       on_load: function () {
         $('#shield').toggle(true);
         $('#picker').css('transform', 'rotate(' + prediction + 'deg)');
-        $('#shield').css('transform', 'rotate(' + (prediction + 20) + 'deg) skewX(-50deg)');
+        $('#shield').css('transform', 'rotate(' + (prediction + 25) + 'deg) skewX(-40deg)');
         $('#counter').text(n_TrialPerBlock + 1 - n);
         $('#picker-circle').css('background-color', colorStyle2);
         $('#pickerOutcome').css('transform', 'rotate(' + outcome + 'deg)');
@@ -559,8 +778,8 @@ function block2(timeline, jsPsych, sync_cp = true) {
  ****/
 function block3(timeline, jsPsych, sync_cp = true) {
   var block3_intro = {
-    type: jsPsychHtmlbuttonResponse,
-    stimulus: `<div><img src=${images['zombie.png']} style='top:20%; left: 10% ;height:300px;width: 300px'><p>In this block, you will face three groups of zombies.</p></div>`,
+    type: jsPsychHtmlButtonResponse,
+    stimulus: `<div><img src=${images['zombie.png']} style='top:20%; left: 10% ;height:300px;width: auto'><p>In this block, you will face three groups of zombies.</p></div>`,
 
     choices: ['Start'],
   };
@@ -679,7 +898,7 @@ function block3(timeline, jsPsych, sync_cp = true) {
       on_load: function () {
         $('#shield').toggle(true);
         $('#picker').css('transform', 'rotate(' + prediction + 'deg)');
-        $('#shield').css('transform', 'rotate(' + (prediction + 20) + 'deg) skewX(-50deg)');
+        $('#shield').css('transform', 'rotate(' + (prediction + 25) + 'deg) skewX(-40deg)');
         $('#counter').text(n_TrialPerBlock + 1 - n);
         $('#picker-circle').css('background-color', colorStyle3);
         $('#pickerOutcome').css('transform', 'rotate(' + outcome + 'deg)');
@@ -698,4 +917,13 @@ function block3(timeline, jsPsych, sync_cp = true) {
   }
 }
 
-export { practice_block1, practice_block2, block1, block2, block3, rtDeadline };
+export {
+  getPracticeBlock0Timeline,
+  practice_block01,
+  practice_block1,
+  practice_block2,
+  block1,
+  block2,
+  block3,
+  rtDeadline,
+};

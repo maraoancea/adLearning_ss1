@@ -7,7 +7,9 @@
 
  */
 import $ from 'jquery';
-import * as Math from 'mathjs';
+import Math from 'mathjs';
+//import * as Math from 'mathjs';
+// this star downloads all the functions
 // import { ParameterType } from 'jspsych';
 var Click = (function (jspsych) {
   'use strict';
@@ -105,7 +107,7 @@ var Click = (function (jspsych) {
 
         const shieldRotate = (x, y) => {
           // 红色阴影的度数？？为什么不是上下两个呢
-          return rotate(x, y) + 20;
+          return rotate(x, y) + 25;
         };
 
         var clickTime = [];
@@ -123,7 +125,7 @@ var Click = (function (jspsych) {
           $('#v').toggle(true);
           $('#shield').toggle(true);
           shield.style[transform] =
-            'rotate(' + shieldRotate(event.pageX, event.pageY) + 'deg) skewX(-50deg)';
+            'rotate(' + shieldRotate(event.pageX, event.pageY) + 'deg) skewX(-40deg)';
           console.log(event.pageX);
           console.log(event.pageY);
           picker.style[transform] = 'rotate(' + rotate(event.pageX, event.pageY) + 'deg)';
@@ -214,7 +216,7 @@ var Click = (function (jspsych) {
 
         if (trial.response_ends_trial) {
           this.jsPsych.pluginAPI.setTimeout(function () {
-            // after wait is over
+            // after wait is over</div>';
             end_trial();
           }, trial.trial_duration);
         }

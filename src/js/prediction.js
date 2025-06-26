@@ -8,7 +8,8 @@
  */
 import $ from 'jquery';
 //
-import * as Math from 'mathjs';
+import Math from 'mathjs';
+//import * as Math from 'mathjs';
 import { ParameterType } from 'jspsych';
 import { rtDeadline } from './blocksetting123';
 import { images } from '../lib/utils';
@@ -145,7 +146,7 @@ class Click {
         $('#h').toggle(true);
         $('#v').toggle(true);
         $('#shield').toggle(true);
-        shield.style.transform = 'rotate(' + (angle + 20) + 'deg) skewX(-50deg)';
+        shield.style.transform = 'rotate(' + (angle + 25) + 'deg) skewX(-40deg)';
         picker.style.transform = 'rotate(' + angle + 'deg)';
 
         // clear listeners
