@@ -11,7 +11,7 @@ import $ from 'jquery';
 import Math from 'mathjs';
 //import * as Math from 'mathjs';
 import { ParameterType } from 'jspsych';
-import { rtDeadline } from './blocksetting123';
+import { rtDeadline } from './blocksetting1';
 import { images } from '../lib/utils';
 // var Click = (function (jspsych) {
 // "use strict";
