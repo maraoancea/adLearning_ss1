@@ -235,17 +235,29 @@ var practice01_end = {
     const nNow       = get_n_elapsed_trials();
     const blockScore = get_block_score(block_start_trial, nNow);
     const possible   = nNow - block_start_trial;
-
+    if (blockScore >= 6) {
     return `
       <div style="text-align:center; line-height:2;">
         <img src=${images['taskImgp01.png']} style="height:400px;width:auto"><br>
         <p>
-          You scored <b>${blockScore}</b> / <b>${possible}</b> possible points in this block.
-         <br>The true preferred location of the zombies was <u>7 o'clock</u> (shown in image above).
-         <br>If you consistently placed your shield here, you would have scored <b>8/10 points</b> in this block.
-         <br>As shown above, aiming for the preferred attack location results in capturing most zombies.
+          You scored <b>${blockScore} / ${possible}</b> possible points in this block.
+         <br>All the actual attack locations are shown in the image above, with the arrow indicating the zombies' preferred attack location.
+         <br>If you consistently placed your shield as shown, you would have captured <b>8/10</b> zombies in this block.
         </p>
       </div>`;
+    }
+    else{
+      return `
+      <div style="text-align:center; line-height:2;">
+        <img src=${images['taskImgp01.png']} style="height:400px;width:auto"><br>
+        <p>
+          You scored <b>${blockScore} / ${possible}</b> possible points in this block.
+         <br>All the actual attack locations are shown in the image above, with the arrow indicating the preferred attack location.
+         <br>If you consistently placed your shield as shown (around 7 o'clock), you would have captured <b>8/10</b> zombies in this block.
+        </p>
+        </p>
+      </div>`;
+    }
   },
   choices: ['Next'],
   on_load: function() {
@@ -262,12 +274,46 @@ var practice01_end = {
     <div><<img src=${images['zombie.png']} style='top:20%; left: 10% ;height:300px;width:auto'><h1></h1>
       <h2>Practice Round 3: Find the Attack Location Yourself (Again)</h2>
       <p style='width: 960px;line-height:2;text-align:center'><br>
-      <br>In this practice, we <strong> will not</strong> show you the zombies preferred attack location again.
-      <br>You must <b>figure out their general attack location on your own</b>. 
-      <br> Remember to focus on the general attack location to maximize your success.
+      <br>Let's practice finding the zombies preferred attack location again.
+      <br>Just like last time, we <strong> will not</strong> indicate where to place your shield ahead of time.
       </div>`,
       // might be too explicit
   };
+
+  var practice02_end={
+    type: jsPsychHtmlButtonResponse,
+  // this function runs at display time, so it sees all the data
+    stimulus: function() {
+      const nNow       = get_n_elapsed_trials();
+      const blockScore = get_block_score(block_start_trial, nNow);
+      const possible   = nNow - block_start_trial;
+      if(blockScore >= 6) {
+
+        return `
+        <div style="text-align:center; line-height:2;">
+          <img src=${images['zombie.png']} style="height:400px;width:auto"><br>
+          <p>
+            You scored <b>${blockScore}</b> / <b>${possible}</b> possible points in this block. Good job!
+        </p>
+        </div>`}
+      else{   
+        return `
+          <div style="text-align:center; line-height:2;">
+          <img src=${images['zombie.png']} style="height:400px;width:auto"><br>
+          <p>
+            You scored <b>${blockScore}</b> / <b>${possible}</b> possible points in this block.
+            <br>Aiming for the preferred attack location will help you maximize your score.
+          </p>
+          </div>`
+      };
+    },
+  choices: ['Next'],
+    on_load: function() {
+    // advance the starting index so the next block tallies only new trials
+      const nNow = get_n_elapsed_trials();
+      block_start_trial = nNow;
+    }
+  }
 
   var practice_intermed1 = {
     type: jsPsychInstructions,
@@ -275,11 +321,12 @@ var practice01_end = {
       // pg 6
       `<div><img src=${images['taskImg5_new.png']} style='top:20%; left: 10% ;height:400px;width: auto'><h1></h1> 
       <p style='width: 960px;line-height:2;text-align:left'><br>
-      <br>It's also important to note that zombies of the same color will <b>occasionally redirect their attacks to a completely new location on the perimeter.</b>
+      <br>It's also important to note that zombies will <b>occasionally redirect their attacks to a completely new location on the perimeter.</b>
+      <br> Although the zombies usually attack around the same location, they may completely redirect their target attack area at any time.
       </div>`,
       //pg 7 (intro practice)
       `<div><<img src=${images['zombie.png']} style='top:20%; left: 10% ;height:300px;width:auto'><h1></h1> 
-      <h2>Practice Round 3</h2>
+      <h2>Practice Round 4</h2>
       <p style='width: 960px;line-height:2;text-align:center'><br>
       <br>Similar to the last practice, you will have practice finding the zombie's general attack location, but stay alert:
       <br><b>The zombies will occasionally redirect their attacks to a completely new location.</b>
@@ -355,7 +402,7 @@ var practice01_end = {
    */
   var questions = [
     '<b>What will you do in this task?</b>',
-    '<b>How will you know which group a zombie is from?</b>',
+    '<b>What does the red shaded area represent after placing your bomb? </b>',
     '<b>How will zombies attack?</b>',
   ];
 
@@ -366,7 +413,12 @@ var practice01_end = {
     'All of the above',
   ];
 
-  var check2_opts = ['Shape', 'Color', 'Letter', 'Preferred food type (brains)'];
+  var check2_opts = [
+    'The bomb\'s blast zone',
+    'The zombies\' possible paths',
+    'The safe zone',
+    'It\'s just a decoration',
+  ];
   var check3_opts = [
     'They will usually attack around the same location',
     'Occasionally they will change to a completely new location',
@@ -606,6 +658,7 @@ var practice01_end = {
   timeline.push(practice01_end);
   timeline.push(practice02_intro);
   practice_block02(timeline, jsPsych);
+  timeline.push(practice02_end);
 
   timeline.push(practice_intermed1);
   practice_block1(timeline, jsPsych);
