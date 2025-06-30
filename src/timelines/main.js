@@ -601,6 +601,9 @@ var practice01_end = {
   timeline.push(practice_instruction1);
   timeline.push(practice0_loop);
   //practice_block0(timeline, jsPsych);
+
+
+
   timeline.push(practice_instruction2);
   practice_block01(timeline, jsPsych);
   timeline.push(practice01_end);
