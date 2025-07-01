@@ -319,24 +319,53 @@ var practice01_end = {
     type: jsPsychInstructions,
     pages: [
       // pg 6
-      `<div><img src=${images['taskImg5_new.png']} style='top:20%; left: 10% ;height:400px;width: auto'><h1></h1> 
-      <p style='width: 960px;line-height:2;text-align:left'><br>
-      <br>It's also important to note that zombies will <b>occasionally redirect their attacks to a completely new location on the perimeter.</b>
-      <br> Although the zombies usually attack around the same location, they may completely redirect their target attack area at any time.
+      `<div style="text-align:center">
+       <img src=${images['taskImg5a.png']} style="height:400px;width:auto">
+       <p style="width: 960px;line-height:2;text-align:left">
+         Now, zombies will <b>occasionally redirect their attacks to a completely new location on the perimeter.</b>
+         <br>This will be true for the rest of the task.
+       </p>
+       <p style="font-style:italic;font-size:0.9em;margin-top:10px;">
+         Click “Next” to see a preview of this.
+       </p>
+       
+     </div>`,
+    // page 2: same text, second example image
+      `<div style="text-align:center">
+       <img src=${images['taskImg5b.png']} style="height:400px;width:auto">
+       <p style="width: 960px;line-height:2;text-align:left">
+         Now, zombies will <b>occasionally redirect their attacks to a completely new location on the perimeter.</b>
+         <br>This will be true for the rest of the task.
+       </p>
+        <p style="font-style:italic;font-size:0.9em;margin-top:10px;">
+         Click “Next” to see a preview of this.
+       </p>
+     </div>`,
+    // page 3: same text, third example image
+      `<div style="text-align:center">
+        <img src=${images['taskImg5c.png']} style="height:400px;width:auto">
+        <p style="width: 960px;line-height:2;text-align:left">
+         Now, zombies will <b>occasionally redirect their attacks to a completely new location on the perimeter.</b>
+          <br>This will be true for the rest of the task.
+        </p>
+         <p style="font-style:italic;font-size:0.9em;margin-top:10px;">
+         Click “Next” to see a preview of this.
+       </p>
       </div>`,
       //pg 7 (intro practice)
       `<div><<img src=${images['zombie.png']} style='top:20%; left: 10% ;height:300px;width:auto'><h1></h1> 
-      <h2>Practice Round 4</h2>
-      <p style='width: 960px;line-height:2;text-align:center'><br>
-      <br>Similar to the last practice, you will have practice finding the zombie's general attack location, but stay alert:
-      <br><b>The zombies will occasionally redirect their attacks to a completely new location.</b>
-      </div>`,
-    ],
+        <h2>Practice Round 4</h2>
+        <p style='width: 960px;line-height:2;text-align:center'><br>
+        <br>Similar to the last practice, you will have practice finding the zombie's general attack location, but stay alert:
+        <br><b>The zombies will occasionally redirect their attacks to a completely new location.</b>
+        </div>`,
+      ],
     //Last round, we told you the exact central attack point of the zombies to guide your bomb placement. Now, you will practice finding the best bomb location on your own. Good luck!
     //However, we will not tell you the zombies attack location this time, but you will have to figure this out. This will be true for the rest of the trials.
     show_clickable_nav: true,
     button_label_previous: 'Previous',
     button_label_next: 'Next',
+    button_label_finish:   "Start Practice",  // on the last page only
     data: {
       task_type: 'instructions',
     },
@@ -414,8 +443,8 @@ var practice01_end = {
   ];
 
   var check2_opts = [
-    'The bomb\'s blast zone',
     'The zombies\' possible paths',
+    'The bomb\'s blast zone',
     'The safe zone',
     'It\'s just a decoration',
   ];

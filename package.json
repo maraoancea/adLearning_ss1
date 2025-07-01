@@ -29,7 +29,7 @@
     "electron-squirrel-startup": "^1.0.0",
     "event-marker": "git+https://github.com/brown-ccv/event-marker.git",
     "execa": "^5.0.0",
-    "firebase": "^9.8.4",
+    "firebase": "^9.23.0",
     "fs-extra": "^8.1.0",
     "jquery": "^3.4.1",
     "json2csv": "^6.0.0-alpha.2",
