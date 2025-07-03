@@ -1,17 +1,17 @@
 {
-  "name": "adlearning_web_HC",
+  "name": "adlearning_ss1",
   "description": "all-in-one task starter app with jsPsych + React + Electron + psiturk ",
   "author": {
-    "name": "Luning He",
-    "email": "luninghepsy@gmail.com",
-    "url": "https://github.com/heeluning/adLearning_web_HC.git"
+    "name": "Mara Oancea",
+    "email": "mara.a.oancea@gmail.com",
+    "url": "https://github.com/maraoancea/adLearning_ss1.git"
   },
   "version": "3.0.1",
   "license": "MIT",
   "private": true,
   "main": "public/electron.js",
   "homepage": ".",
-  "repository": "https://github.com/heeluning/adLearning_web_HC.git",
+  "repository": "https://github.com/maraoancea/adLearning_ss1.git",
   "dependencies": {
     "@brown-ccv/behavioral-task-trials": "^2.0.0",
     "@fortawesome/fontawesome-free": "^5.9.0",
