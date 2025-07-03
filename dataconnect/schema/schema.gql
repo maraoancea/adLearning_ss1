@@ -1,0 +1,47 @@
+type User @table {
+  displayName: String!
+  email: String
+  role: String
+  createdAt: Timestamp!
+}
+
+type Experiment @table {
+  name: String!
+  type: String!
+  instructions: String!
+  description: String
+  durationMinutes: Int
+  isActive: Boolean
+  createdAt: Timestamp!
+}
+
+type Stimulus @table {
+  experiment: Experiment!
+  content: String!
+  stimulusType: String!
+  sequenceNumber: Int!
+  expectedResponse: String
+  presentationDurationMs: Int
+  createdAt: Timestamp!
+}
+
+type ExperimentRun @table {
+  user: User!
+  experiment: Experiment!
+  startTime: Timestamp!
+  endTime: Timestamp
+  status: String!
+  score: Float
+  notes: String
+  createdAt: Timestamp!
+}
+
+type Response @table {
+  experimentRun: ExperimentRun!
+  stimulus: Stimulus!
+  userAnswer: String!
+  isCorrect: Boolean!
+  reactionTimeMs: Int!
+  attemptsCount: Int
+  createdAt: Timestamp!
+}
