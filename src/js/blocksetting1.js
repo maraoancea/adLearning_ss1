@@ -39,12 +39,12 @@ let colorP0 = '#0173b2'; // same color as shown in instructions
 let colorP01 = '#ca9161'; // color chosen so not as same as main blocks
 // for practice block 01, 02.. lets change 02's colors
 
-let colorP02 =' #fbafe4';
+let colorP02 = ' #fbafe4';
 let colorP1 = '#56b4e9'; //for big practice block 1
 //let colorP2 = colorsP2;
 //for (let h = 0; h < n_TrialPractice; h++) {
-  //let colorRepeat = jsPsych.randomization.shuffle(colorsP2);
-  //colorP2 = colorP2.concat(colorRepeat);
+//let colorRepeat = jsPsych.randomization.shuffle(colorsP2);
+//colorP2 = colorP2.concat(colorRepeat);
 //}
 
 // colors for block 1
@@ -56,14 +56,14 @@ let color1 = colors[0]; // note: all trials have the same color
 ///let color2 = colors2;
 //let n_trialsPerColor = Math.ceil(n_TrialPerBlock / 2);
 //for (let h = 0; h < n_trialsPerColor; h++) {
-  //h<100
+//h<100
 //  let colorRepeat = jsPsych.randomization.shuffle(colors2);
-  //     let a = color2.slice(color2.length-2); // a: first color
-  //     if (colorRepeat.toString() !== a.toString() && colorRepeat[0] !== color2[color2.length-1]){
-  //
-  //           color2 = color2.concat(colorRepeat)
-  //     }  else h--;
- // color2 = color2.concat(colorRepeat);
+//     let a = color2.slice(color2.length-2); // a: first color
+//     if (colorRepeat.toString() !== a.toString() && colorRepeat[0] !== color2[color2.length-1]){
+//
+//           color2 = color2.concat(colorRepeat)
+//     }  else h--;
+// color2 = color2.concat(colorRepeat);
 //}
 
 // colors for block 3
@@ -168,18 +168,7 @@ function practice_block0(timeline, jsPsych) {
   let minUpdateCount = 7; // number of trials that must be below updateThreshold
   let updates = [];
   let predictions = [];
-  let outcomes = [
-  267.18,
-  294.64,
-  234.72,
-  284.13,
-  267.62,
-  274.55,
-  264.57,
-  261.07,
-  297.36,
-  290.45
-  ];
+  let outcomes = [267.18, 294.64, 234.72, 284.13, 267.62, 274.55, 264.57, 261.07, 297.36, 290.45];
   let totalScore = 0;
 
   for (let n = 1; n < n_TrialPractice1 + 1; n++) {
@@ -323,18 +312,7 @@ function getPracticeBlock0Timeline(jsPsych) {
 function practice_block01(timeline, jsPsych) {
   let n_TrialPractice1 = 10;
   let trial_type_label = 'practice';
-  let outcomes = [
-  136.55,
-  128.93,
-  96.25,
-  109.07,
-  112.44,
-  164.57,
-  140.82,
-  134.58,
-  114.81,
-  147.85
-];
+  let outcomes = [136.55, 128.93, 96.25, 109.07, 112.44, 164.57, 140.82, 134.58, 114.81, 147.85];
 
   //jsPsych.data.addDataToLastTrial({ totalScore: 0 });  // Initialize totalScore at the start
   for (let n = 1; n < n_TrialPractice1 + 1; n++) {
@@ -376,7 +354,7 @@ function practice_block01(timeline, jsPsych) {
     var observe_outcome = {
       type: Position,
       data: { type: trial_type_label },
-       on_load: function () {
+      on_load: function () {
         $('#shield').toggle(true);
         $('#picker').css('transform', 'rotate(' + prediction + 'deg)');
         $('#shield').css('transform', 'rotate(' + (prediction + 25) + 'deg) skewX(-40deg)');
@@ -406,7 +384,6 @@ function practice_block02(timeline, jsPsych) {
   let n_TrialPractice2 = 10;
   let trial_type_label = 'practice';
 
-
   //jsPsych.data.addDataToLastTrial({ totalScore: 0 });  // Initialize totalScore at the start
 
   for (let n = 1; n < n_TrialPractice2 + 1; n++) {
@@ -422,8 +399,8 @@ function practice_block02(timeline, jsPsych) {
     mean = x1;
     console.log(colorStyleP);
     console.log(mean);
-   // console.log(c1);
-   // console.log(jitters_1[c1]);
+    // console.log(c1);
+    // console.log(jitters_1[c1]);
     console.log(outcome);
 
     var make_prediction = {
@@ -474,7 +451,6 @@ function practice_block02(timeline, jsPsych) {
     timeline.push(practice);
   }
 }
-
 
 function practice_block1(timeline, jsPsych) {
   let counterP_1 = 0;
@@ -559,7 +535,6 @@ function practice_block1(timeline, jsPsych) {
     timeline.push(practice);
   }
 }
-
 
 /*****
 1color block n < n_TrialPerBlock + 1
