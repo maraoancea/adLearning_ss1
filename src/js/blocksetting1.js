@@ -12,7 +12,7 @@ import jsPsychHtmlButtonResponse from '@jspsych/plugin-html-button-response';
 import { images } from '../lib/utils';
 
 // design
-const n_TrialPerBlock = 200;
+const n_TrialPerBlock = 10;
 const n_TrialPractice = 25; // FIX THIS !11
 const n_SamePosition = 7;
 const n_MaxJitter = 4; // 7-11, avg of 9
@@ -39,12 +39,12 @@ let colorP0 = '#0173b2'; // same color as shown in instructions
 let colorP01 = '#ca9161'; // color chosen so not as same as main blocks
 // for practice block 01, 02.. lets change 02's colors
 
-let colorP02 = ' #fbafe4';
+let colorP02 =' #fbafe4';
 let colorP1 = '#56b4e9'; //for big practice block 1
 //let colorP2 = colorsP2;
 //for (let h = 0; h < n_TrialPractice; h++) {
-//let colorRepeat = jsPsych.randomization.shuffle(colorsP2);
-//colorP2 = colorP2.concat(colorRepeat);
+  //let colorRepeat = jsPsych.randomization.shuffle(colorsP2);
+  //colorP2 = colorP2.concat(colorRepeat);
 //}
 
 // colors for block 1
@@ -56,14 +56,14 @@ let color1 = colors[0]; // note: all trials have the same color
 ///let color2 = colors2;
 //let n_trialsPerColor = Math.ceil(n_TrialPerBlock / 2);
 //for (let h = 0; h < n_trialsPerColor; h++) {
-//h<100
+  //h<100
 //  let colorRepeat = jsPsych.randomization.shuffle(colors2);
-//     let a = color2.slice(color2.length-2); // a: first color
-//     if (colorRepeat.toString() !== a.toString() && colorRepeat[0] !== color2[color2.length-1]){
-//
-//           color2 = color2.concat(colorRepeat)
-//     }  else h--;
-// color2 = color2.concat(colorRepeat);
+  //     let a = color2.slice(color2.length-2); // a: first color
+  //     if (colorRepeat.toString() !== a.toString() && colorRepeat[0] !== color2[color2.length-1]){
+  //
+  //           color2 = color2.concat(colorRepeat)
+  //     }  else h--;
+ // color2 = color2.concat(colorRepeat);
 //}
 
 // colors for block 3
@@ -110,14 +110,8 @@ function normalRandomScaled(mean, stddev) {
 }
 // make pseudo random position
 const numsPrac1_1 = angle_array();
-//const numsPrac2_1 = angle_array();
-//const numsPrac2_2 = angle_array();
 const nums1 = angle_array();
-//const nums2_1 = angle_array();
-//const nums2_2 = angle_array();
-//const nums3_1 = angle_array();
-//const nums3_2 = angle_array();
-//const nums3_3 = angle_array();
+
 
 function angle_array() {
   let nums = [];
@@ -168,7 +162,18 @@ function practice_block0(timeline, jsPsych) {
   let minUpdateCount = 7; // number of trials that must be below updateThreshold
   let updates = [];
   let predictions = [];
-  let outcomes = [267.18, 294.64, 234.72, 284.13, 267.62, 274.55, 264.57, 261.07, 297.36, 290.45];
+  let outcomes = [
+  267.18,
+  294.64,
+  234.72,
+  284.13,
+  267.62,
+  274.55,
+  264.57,
+  261.07,
+  297.36,
+  290.45
+  ];
   let totalScore = 0;
 
   for (let n = 1; n < n_TrialPractice1 + 1; n++) {
@@ -258,22 +263,15 @@ function practice_block0(timeline, jsPsych) {
       $('#arrow-tail').remove();
       let sufficientUpdates = updates.filter((u) => u <= updateThreshold).length;
       console.log('updates', updates);
-      if (sufficientUpdates >= 9) {
+      if (sufficientUpdates >=  minUpdateCount) {
         return `<div style= "line-height:1.75;">
         <p>Great job! You got ${totalScore} out of 10 possible points in this block.</p>
         <p style = "text-align: center;">
-        <br>Hitting at least <b> 8 out of 10 zombies </b> means that you used the best possible strategy for this block.
-        <br>The zombies stagger around their central attack point unpredictably, so <u>it is not possible to hit every zombie</u>.
+        <br>If you place the shield at 12 o'clock every trial, you could hit <b> 8 out of 10 zombies </b>.
+        <br>The zombies stagger around their target area unpredictably, so <u>it is not possible to hit every zombie</u>.
         <br> You can proceed to the next practice.</p></div>`;
-      } else if (sufficientUpdates >= minUpdateCount) {
-        return `<div style= "line-height:1.75;">
-        <p>Great job! You got <b>${totalScore} out of 10</b> possible points in this block.</p>
-        <p>
-        The zombies stagger unpredictably, so <u>it is not possible to hit every zombie.</u>
-        <br> You can proceed to the next practice.</p></div>`;
-        //could include, "refining your strategy may result in more hits, but a perfect score in not expected"
       } else {
-        return `<div><p>Sorry, you did not correctly aim to capture as many zombies as possible.</p>
+        return `<div><p>Sorry, you did not place your shield at the ideal spot to capture as many zombies as possible.</p>
         <p>Remember, the zombies preferred attack location is represented by the arrow. </p>
         <p>Please try again.</p></div>`;
       }
@@ -312,7 +310,18 @@ function getPracticeBlock0Timeline(jsPsych) {
 function practice_block01(timeline, jsPsych) {
   let n_TrialPractice1 = 10;
   let trial_type_label = 'practice';
-  let outcomes = [136.55, 128.93, 96.25, 109.07, 112.44, 164.57, 140.82, 134.58, 114.81, 147.85];
+  let outcomes = [
+  136.55,
+  128.93,
+  96.25,
+  109.07,
+  112.44,
+  164.57,
+  140.82,
+  134.58,
+  114.81,
+  147.85
+];
 
   //jsPsych.data.addDataToLastTrial({ totalScore: 0 });  // Initialize totalScore at the start
   for (let n = 1; n < n_TrialPractice1 + 1; n++) {
@@ -354,7 +363,7 @@ function practice_block01(timeline, jsPsych) {
     var observe_outcome = {
       type: Position,
       data: { type: trial_type_label },
-      on_load: function () {
+       on_load: function () {
         $('#shield').toggle(true);
         $('#picker').css('transform', 'rotate(' + prediction + 'deg)');
         $('#shield').css('transform', 'rotate(' + (prediction + 25) + 'deg) skewX(-40deg)');
@@ -384,6 +393,7 @@ function practice_block02(timeline, jsPsych) {
   let n_TrialPractice2 = 10;
   let trial_type_label = 'practice';
 
+
   //jsPsych.data.addDataToLastTrial({ totalScore: 0 });  // Initialize totalScore at the start
 
   for (let n = 1; n < n_TrialPractice2 + 1; n++) {
@@ -399,8 +409,8 @@ function practice_block02(timeline, jsPsych) {
     mean = x1;
     console.log(colorStyleP);
     console.log(mean);
-    // console.log(c1);
-    // console.log(jitters_1[c1]);
+   // console.log(c1);
+   // console.log(jitters_1[c1]);
     console.log(outcome);
 
     var make_prediction = {
@@ -451,6 +461,7 @@ function practice_block02(timeline, jsPsych) {
     timeline.push(practice);
   }
 }
+
 
 function practice_block1(timeline, jsPsych) {
   let counterP_1 = 0;
@@ -535,6 +546,7 @@ function practice_block1(timeline, jsPsych) {
     timeline.push(practice);
   }
 }
+
 
 /*****
 1color block n < n_TrialPerBlock + 1

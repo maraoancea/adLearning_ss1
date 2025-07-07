@@ -203,9 +203,9 @@ function buildTimeline(jsPsych) {
       <br>You must <b>figure out their general attack location on your own</b>. This will be true for the rest of the task.
       </div>`,
   };
-  /*TODO:EDIT THIS TO INSTRUCTIONS AND CHANGE THIS TO INTRO FOR PRACTICE02 INTRO AS WELL*/
+/*TODO:EDIT THIS TO INSTRUCTIONS AND CHANGE THIS TO INTRO FOR PRACTICE02 INTRO AS WELL*/
 
-  /* pages: [
+ /* pages: [
   /  // First page with the current stimulus
     `<div>
       <img src=${images['taskImgp01.png']} style='top:20%; left: 10% ;height:400px;width: auto'><h1></h1> 
@@ -227,15 +227,15 @@ function buildTimeline(jsPsych) {
     </div>`
   ],
 */
-  var practice01_end = {
-    type: jsPsychHtmlButtonResponse,
-    // this function runs at display time, so it sees all the data
-    stimulus: function () {
-      const nNow = get_n_elapsed_trials();
-      const blockScore = get_block_score(block_start_trial, nNow);
-      const possible = nNow - block_start_trial;
-      if (blockScore >= 6) {
-        return `
+var practice01_end = {
+  type: jsPsychHtmlButtonResponse,
+  // this function runs at display time, so it sees all the data
+  stimulus: function() {
+    const nNow       = get_n_elapsed_trials();
+    const blockScore = get_block_score(block_start_trial, nNow);
+    const possible   = nNow - block_start_trial;
+    if (blockScore >= 6) {
+    return `
       <div style="text-align:center; line-height:2;">
         <img src=${images['taskImgp01.png']} style="height:400px;width:auto"><br>
         <p>
@@ -244,8 +244,9 @@ function buildTimeline(jsPsych) {
          <br>If you consistently placed your shield as shown, you would have captured <b>8/10</b> zombies in this block.
         </p>
       </div>`;
-      } else {
-        return `
+    }
+    else{
+      return `
       <div style="text-align:center; line-height:2;">
         <img src=${images['taskImgp01.png']} style="height:400px;width:auto"><br>
         <p>
@@ -255,15 +256,15 @@ function buildTimeline(jsPsych) {
         </p>
         </p>
       </div>`;
-      }
-    },
-    choices: ['Next'],
-    on_load: function () {
-      // advance the starting index so the next block tallies only new trials
-      const nNow = get_n_elapsed_trials();
-      block_start_trial = nNow;
-    },
-  };
+    }
+  },
+  choices: ['Next'],
+  on_load: function() {
+    // advance the starting index so the next block tallies only new trials
+    const nNow = get_n_elapsed_trials();
+    block_start_trial = nNow;
+  }
+};
 
   var practice02_intro = {
     type: jsPsychHtmlButtonResponse,
@@ -275,25 +276,26 @@ function buildTimeline(jsPsych) {
       <br>Let's practice finding the zombies preferred attack location again.
       <br>Just like last time, we <strong> will not</strong> indicate where to place your shield ahead of time.
       </div>`,
-    // might be too explicit
+      // might be too explicit
   };
 
-  var practice02_end = {
+  var practice02_end={
     type: jsPsychHtmlButtonResponse,
-    // this function runs at display time, so it sees all the data
-    stimulus: function () {
-      const nNow = get_n_elapsed_trials();
+  // this function runs at display time, so it sees all the data
+    stimulus: function() {
+      const nNow       = get_n_elapsed_trials();
       const blockScore = get_block_score(block_start_trial, nNow);
-      const possible = nNow - block_start_trial;
-      if (blockScore >= 6) {
+      const possible   = nNow - block_start_trial;
+      if(blockScore >= 6) {
+
         return `
         <div style="text-align:center; line-height:2;">
           <img src=${images['zombie.png']} style="height:400px;width:auto"><br>
           <p>
             You scored <b>${blockScore}</b> / <b>${possible}</b> possible points in this block. Good job!
         </p>
-        </div>`;
-      } else {
+        </div>`}
+      else{   
         return `
           <div style="text-align:center; line-height:2;">
           <img src=${images['zombie.png']} style="height:400px;width:auto"><br>
@@ -301,16 +303,16 @@ function buildTimeline(jsPsych) {
             You scored <b>${blockScore}</b> / <b>${possible}</b> possible points in this block.
             <br>Aiming for the preferred attack location will help you maximize your score.
           </p>
-          </div>`;
-      }
+          </div>`
+      };
     },
-    choices: ['Next'],
-    on_load: function () {
-      // advance the starting index so the next block tallies only new trials
+  choices: ['Next'],
+    on_load: function() {
+    // advance the starting index so the next block tallies only new trials
       const nNow = get_n_elapsed_trials();
       block_start_trial = nNow;
-    },
-  };
+    }
+  }
 
   var practice_intermed1 = {
     type: jsPsychInstructions,
@@ -327,7 +329,7 @@ function buildTimeline(jsPsych) {
        </p>
        
      </div>`,
-      // page 2: same text, second example image
+    // page 2: same text, second example image
       `<div style="text-align:center">
        <img src=${images['taskImg5b.png']} style="height:400px;width:auto">
        <p style="width: 960px;line-height:2;text-align:left">
@@ -338,16 +340,13 @@ function buildTimeline(jsPsych) {
          Click “Next” to see a preview of this.
        </p>
      </div>`,
-      // page 3: same text, third example image
+    // page 3: same text, third example image
       `<div style="text-align:center">
         <img src=${images['taskImg5c.png']} style="height:400px;width:auto">
         <p style="width: 960px;line-height:2;text-align:left">
          Now, zombies will <b>occasionally redirect their attacks to a completely new location on the perimeter.</b>
           <br>This will be true for the rest of the task.
         </p>
-         <p style="font-style:italic;font-size:0.9em;margin-top:10px;">
-         Click “Next” to see a preview of this.
-       </p>
       </div>`,
       //pg 7 (intro practice)
       `<div><<img src=${images['zombie.png']} style='top:20%; left: 10% ;height:300px;width:auto'><h1></h1> 
@@ -356,13 +355,13 @@ function buildTimeline(jsPsych) {
         <br>Similar to the last practice, you will have practice finding the zombie's general attack location, but stay alert:
         <br><b>The zombies will occasionally redirect their attacks to a completely new location.</b>
         </div>`,
-    ],
+      ],
     //Last round, we told you the exact central attack point of the zombies to guide your bomb placement. Now, you will practice finding the best bomb location on your own. Good luck!
     //However, we will not tell you the zombies attack location this time, but you will have to figure this out. This will be true for the rest of the trials.
     show_clickable_nav: true,
     button_label_previous: 'Previous',
     button_label_next: 'Next',
-    button_label_finish: 'Start Practice', // on the last page only
+    button_label_finish:   "Start Practice",  // on the last page only
     data: {
       task_type: 'instructions',
     },
@@ -440,10 +439,10 @@ function buildTimeline(jsPsych) {
   ];
 
   var check2_opts = [
-    "The zombies' possible paths",
-    "The bomb's blast zone",
+    'The zombies\' possible paths',
+    'The bomb\'s blast zone',
     'The safe zone',
-    "It's just a decoration",
+    'It\'s just a decoration',
   ];
   var check3_opts = [
     'They will usually attack around the same location',
@@ -719,6 +718,7 @@ function buildTimeline(jsPsych) {
 
   block1(timeline, jsPsych);
   timeline.push(block_end);
+  
 
   // exit fullscreen:
   var fullscreen_trial_exit = {
@@ -738,6 +738,7 @@ function buildTimeline(jsPsych) {
   timeline.push(free_response_feedback);
   timeline.push(fullscreen_trial_exit);
   timeline.push(goodbye);
+ 
 
   return timeline;
 }
