@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { initParticipant } from '../firebase';
+
 
 function Login({ handleLogin, initialParticipantID, initialStudyID, validationFunction }) {
   // State variables for login screen
@@ -14,7 +16,10 @@ function Login({ handleLogin, initialParticipantID, initialStudyID, validationFu
     // Logs user in if a valid participant/study id combination is given
     validationFunction(participantId, studyId).then((isValid) => {
       setIsError(!isValid);
+      
       if (isValid) handleLogin(studyId, participantId);
+
+
     });
   }
 

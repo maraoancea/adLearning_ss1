@@ -10,6 +10,7 @@ import Login from './components/Login';
 import { config, taskVersion, turkUniqueId } from './config/main';
 import { addToFirebase, validateParticipant } from './firebase';
 import { getProlificId } from './lib/utils';
+//import { set } from 'lodash';
 
 /**
  * The top-level React component for Honeycomb. App handles initiating the jsPsych component when the participant
@@ -86,8 +87,13 @@ function App() {
         const participantId = query.get('participantID');
         const studyId = query.get('studyID');
         if (participantId) setParticipantID(participantId);
+        else
+          setParticipantID('test');
         if (studyId) setStudyID(studyId);
-        // console.log('using firebase', participantId, studyId);
+          setStudyID('firebase-sim');
+        // If no participant ID, set to a default values
+        handleLogin(studyId, participantId);
+        console.log('[App] using firebase autologin params', participantId, studyId);
 
         setMethod('firebase');
       } else {
@@ -147,6 +153,8 @@ function App() {
     setParticipantID(participantId);
     setStudyID(studyId);
     setLoggedIn(true);
+    console.log('[App] handleLogin invoked with', studyId, participantId);
+
   }, []);
 
   if (isError) {
