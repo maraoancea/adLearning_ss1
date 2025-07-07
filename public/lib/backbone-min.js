@@ -199,7 +199,7 @@
         this._previousAttributes = h.clone(this.attributes);
         this.changed = {};
       }
-      (c = this.attributes), (l = this._previousAttributes);
+      ((c = this.attributes), (l = this._previousAttributes));
       if (this.idAttribute in s) this.id = s[this.idAttribute];
       for (r in s) {
         e = s[r];

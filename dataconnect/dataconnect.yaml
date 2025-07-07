@@ -1,12 +1,12 @@
-specVersion: "v1"
-serviceId: "adLearning_ss1"
-location: "northamerica-northeast2"
+specVersion: 'v1'
+serviceId: 'adLearning_ss1'
+location: 'northamerica-northeast2'
 schema:
-  source: "./schema"
+  source: './schema'
   datasource:
     postgresql:
-      database: "participants"
+      database: 'participants'
       cloudSql:
-        instanceId: "adlearning_ss1-fdc"
+        instanceId: 'adlearning_ss1-fdc'
       # schemaValidation: "COMPATIBLE"
-connectorDirs: ["./connector"]
+connectorDirs: ['./connector']

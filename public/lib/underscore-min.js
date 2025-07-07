@@ -29,11 +29,11 @@
     j = function (n) {
       return n instanceof j ? n : this instanceof j ? ((this._wrapped = n), void 0) : new j(n);
     };
-  'undefined' != typeof exports
+  ('undefined' != typeof exports
     ? ('undefined' != typeof module && module.exports && (exports = module.exports = j),
       (exports._ = j))
     : (n._ = j),
-    (j.VERSION = '1.5.1');
+    (j.VERSION = '1.5.1'));
   var A =
     (j.each =
     j.forEach =
@@ -56,13 +56,13 @@
           e);
   };
   var E = 'Reduce of empty array with no initial value';
-  (j.reduce =
+  ((j.reduce =
     j.foldl =
     j.inject =
       function (n, t, r, e) {
         var u = arguments.length > 2;
         if ((null == n && (n = []), v && n.reduce === v))
-          return e && (t = j.bind(t, e)), u ? n.reduce(t, r) : n.reduce(t);
+          return (e && (t = j.bind(t, e)), u ? n.reduce(t, r) : n.reduce(t));
         if (
           (A(n, function (n, i, a) {
             u ? (r = t.call(e, r, n, i, a)) : ((r = n), (u = !0));
@@ -76,7 +76,7 @@
       function (n, t, r, e) {
         var u = arguments.length > 2;
         if ((null == n && (n = []), h && n.reduceRight === h))
-          return e && (t = j.bind(t, e)), u ? n.reduceRight(t, r) : n.reduceRight(t);
+          return (e && (t = j.bind(t, e)), u ? n.reduceRight(t, r) : n.reduceRight(t));
         var i = n.length;
         if (i !== +i) {
           var a = j.keys(n);
@@ -84,7 +84,7 @@
         }
         if (
           (A(n, function (o, c, l) {
-            (c = a ? a[--i] : --i), u ? (r = t.call(e, r, n[c], c, l)) : ((r = n[c]), (u = !0));
+            ((c = a ? a[--i] : --i), u ? (r = t.call(e, r, n[c], c, l)) : ((r = n[c]), (u = !0)));
           }),
           !u)
         )
@@ -134,7 +134,7 @@
                 return (u = u && t.call(e, n, i, a)) ? void 0 : r;
               }),
               !!u);
-      });
+      }));
   var O =
     (j.some =
     j.any =
@@ -150,7 +150,7 @@
               }),
               !!u);
       });
-  (j.contains = j.include =
+  ((j.contains = j.include =
     function (n, t) {
       return null == n
         ? !1
@@ -215,11 +215,11 @@
         e = [];
       return (
         A(n, function (n) {
-          (t = j.random(r++)), (e[r - 1] = e[t]), (e[t] = n);
+          ((t = j.random(r++)), (e[r - 1] = e[t]), (e[t] = n));
         }),
         e
       );
-    });
+    }));
   var F = function (n) {
     return j.isFunction(n)
       ? n
@@ -257,14 +257,14 @@
       u
     );
   };
-  (j.groupBy = function (n, t, r) {
+  ((j.groupBy = function (n, t, r) {
     return k(n, t, r, function (n, t, r) {
       (j.has(n, t) ? n[t] : (n[t] = [])).push(r);
     });
   }),
     (j.countBy = function (n, t, r) {
       return k(n, t, r, function (n, t) {
-        j.has(n, t) || (n[t] = 0), n[t]++;
+        (j.has(n, t) || (n[t] = 0), n[t]++);
       });
     }),
     (j.sortedIndex = function (n, t, r, e) {
@@ -311,7 +311,7 @@
         }),
     (j.compact = function (n) {
       return j.filter(n, j.identity);
-    });
+    }));
   var R = function (n, t, r) {
     return t && j.every(n, j.isArray)
       ? c.apply(r, n)
@@ -320,7 +320,7 @@
         }),
         r);
   };
-  (j.flatten = function (n, t) {
+  ((j.flatten = function (n, t) {
     return R(n, t, []);
   }),
     (j.without = function (n) {
@@ -376,7 +376,7 @@
       var e = 0,
         u = n.length;
       if (r) {
-        if ('number' != typeof r) return (e = j.sortedIndex(n, t)), n[e] === t ? e : -1;
+        if ('number' != typeof r) return ((e = j.sortedIndex(n, t)), n[e] === t ? e : -1);
         e = 0 > r ? Math.max(0, u + r) : r;
       }
       if (y && n.indexOf === y) return n.indexOf(t, r);
@@ -391,13 +391,13 @@
       return -1;
     }),
     (j.range = function (n, t, r) {
-      arguments.length <= 1 && ((t = n || 0), (n = 0)), (r = arguments[2] || 1);
+      (arguments.length <= 1 && ((t = n || 0), (n = 0)), (r = arguments[2] || 1));
       for (var e = Math.max(Math.ceil((t - n) / r), 0), u = 0, i = new Array(e); e > u; )
-        (i[u++] = n), (n += r);
+        ((i[u++] = n), (n += r));
       return i;
-    });
+    }));
   var M = function () {};
-  (j.bind = function (n, t) {
+  ((j.bind = function (n, t) {
     var r, e;
     if (w && n.bind === w) return w.apply(n, o.call(arguments, 1));
     if (!j.isFunction(n)) throw new TypeError();
@@ -456,7 +456,7 @@
         o = 0;
       r || (r = {});
       var c = function () {
-        (o = r.leading === !1 ? 0 : new Date()), (a = null), (i = n.apply(e, u));
+        ((o = r.leading === !1 ? 0 : new Date()), (a = null), (i = n.apply(e, u)));
       };
       return function () {
         var l = new Date();
@@ -479,10 +479,10 @@
         var i = this,
           a = arguments,
           o = function () {
-            (u = null), r || (e = n.apply(i, a));
+            ((u = null), r || (e = n.apply(i, a)));
           },
           c = r && !u;
-        return clearTimeout(u), (u = setTimeout(o, t)), c && (e = n.apply(i, a)), e;
+        return (clearTimeout(u), (u = setTimeout(o, t)), c && (e = n.apply(i, a)), e);
       };
     }),
     (j.once = function (n) {
@@ -495,7 +495,7 @@
     (j.wrap = function (n, t) {
       return function () {
         var r = [n];
-        return a.apply(r, arguments), t.apply(this, r);
+        return (a.apply(r, arguments), t.apply(this, r));
       };
     }),
     (j.compose = function () {
@@ -575,12 +575,12 @@
       return j.isObject(n) ? (j.isArray(n) ? n.slice() : j.extend({}, n)) : n;
     }),
     (j.tap = function (n, t) {
-      return t(n), n;
-    });
+      return (t(n), n);
+    }));
   var S = function (n, t, r, e) {
     if (n === t) return 0 !== n || 1 / n == 1 / t;
     if (null == n || null == t) return n === t;
-    n instanceof j && (n = n._wrapped), t instanceof j && (t = t._wrapped);
+    (n instanceof j && (n = n._wrapped), t instanceof j && (t = t._wrapped));
     var u = l.call(n);
     if (u != l.call(t)) return !1;
     switch (u) {
@@ -605,7 +605,7 @@
       o = t.constructor;
     if (a !== o && !(j.isFunction(a) && a instanceof a && j.isFunction(o) && o instanceof o))
       return !1;
-    r.push(n), e.push(t);
+    (r.push(n), e.push(t));
     var c = 0,
       f = !0;
     if ('[object Array]' == u) {
@@ -617,9 +617,9 @@
         f = !c;
       }
     }
-    return r.pop(), e.pop(), f;
+    return (r.pop(), e.pop(), f);
   };
-  (j.isEqual = function (n, t) {
+  ((j.isEqual = function (n, t) {
     return S(n, t, [], []);
   }),
     (j.isEmpty = function (n) {
@@ -671,7 +671,7 @@
       return f.call(n, t);
     }),
     (j.noConflict = function () {
-      return (n._ = t), this;
+      return ((n._ = t), this);
     }),
     (j.identity = function (n) {
       return n;
@@ -681,8 +681,8 @@
       return e;
     }),
     (j.random = function (n, t) {
-      return null == t && ((t = n), (n = 0)), n + Math.floor(Math.random() * (t - n + 1));
-    });
+      return (null == t && ((t = n), (n = 0)), n + Math.floor(Math.random() * (t - n + 1)));
+    }));
   var I = {
     escape: { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#x27;', '/': '&#x2F;' },
   };
@@ -691,7 +691,7 @@
     escape: new RegExp('[' + j.keys(I.escape).join('') + ']', 'g'),
     unescape: new RegExp('(' + j.keys(I.unescape).join('|') + ')', 'g'),
   };
-  j.each(['escape', 'unescape'], function (n) {
+  (j.each(['escape', 'unescape'], function (n) {
     j[n] = function (t) {
       return null == t
         ? ''
@@ -710,12 +710,12 @@
         var r = (j[t] = n[t]);
         j.prototype[t] = function () {
           var n = [this._wrapped];
-          return a.apply(n, arguments), z.call(this, r.apply(j, n));
+          return (a.apply(n, arguments), z.call(this, r.apply(j, n)));
         };
       });
-    });
+    }));
   var N = 0;
-  (j.uniqueId = function (n) {
+  ((j.uniqueId = function (n) {
     var t = ++N + '';
     return n ? n + t : t;
   }),
@@ -723,7 +723,7 @@
       evaluate: /<%([\s\S]+?)%>/g,
       interpolate: /<%=([\s\S]+?)%>/g,
       escape: /<%-([\s\S]+?)%>/g,
-    });
+    }));
   var q = /(.)^/,
     B = {
       "'": "'",
@@ -735,7 +735,7 @@
       '\u2029': 'u2029',
     },
     D = /\\|'|\r|\n|\t|\u2028|\u2029/g;
-  (j.template = function (n, t, r) {
+  ((j.template = function (n, t, r) {
     var e;
     r = j.defaults({}, r, j.templateSettings);
     var u = new RegExp(
@@ -745,7 +745,7 @@
       ),
       i = 0,
       a = "__p+='";
-    n.replace(u, function (t, r, e, u, o) {
+    (n.replace(u, function (t, r, e, u, o) {
       return (
         (a += n.slice(i, o).replace(D, function (n) {
           return '\\' + B[n];
@@ -763,7 +763,7 @@
         "var __t,__p='',__j=Array.prototype.join," +
         "print=function(){__p+=__j.call(arguments,'');};\n" +
         a +
-        'return __p;\n');
+        'return __p;\n'));
     try {
       e = new Function(r.variable || 'obj', '_', a);
     } catch (o) {
@@ -773,15 +773,15 @@
     var c = function (n) {
       return e.call(this, n, j);
     };
-    return (c.source = 'function(' + (r.variable || 'obj') + '){\n' + a + '}'), c;
+    return ((c.source = 'function(' + (r.variable || 'obj') + '){\n' + a + '}'), c);
   }),
     (j.chain = function (n) {
       return j(n).chain();
-    });
+    }));
   var z = function (n) {
     return this._chain ? j(n).chain() : n;
   };
-  j.mixin(j),
+  (j.mixin(j),
     A(['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'], function (n) {
       var t = e[n];
       j.prototype[n] = function () {
@@ -801,11 +801,11 @@
     }),
     j.extend(j.prototype, {
       chain: function () {
-        return (this._chain = !0), this;
+        return ((this._chain = !0), this);
       },
       value: function () {
         return this._wrapped;
       },
-    });
+    }));
 }.call(this);
 //# sourceMappingURL=underscore-min.map

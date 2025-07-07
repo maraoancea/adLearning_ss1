@@ -14,7 +14,6 @@ firebase.initializeApp({
   appId: process.env.REACT_APP_appId,
 });
 const db = firebase.firestore();
-
 // Use emulator if on localhost
 // TODO 173: Refactor to use NODE_ENV
 if (window.location.hostname === 'localhost') db.useEmulator('localhost', 8080);
@@ -23,7 +22,6 @@ if (window.location.hostname === 'localhost') db.useEmulator('localhost', 8080);
 // "/participant_responses/{studyID}/participants/{participantID}"
 const getParticipantRef = (studyID, participantID) =>
   db.doc(`participant_responses/${studyID}/participants/${participantID}`);
-
 // Get a reference to the Firebase document at
 // "/participant_responses/{studyID}/participants/{participantID}/data/{startDate}"
 const getExperimentRef = (studyID, participantID, startDate) =>
