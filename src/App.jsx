@@ -73,13 +73,11 @@ function App() {
         /* eslint-enable */
       } else if (config.USE_PROLIFIC) {
         const pID = getProlificId();
-        console.log("Prolific ID:", pID);
+        console.log('Prolific ID:', pID);
         if (config.USE_FIREBASE && pID) {
           setMethod('firebase');
           // TODO 145: Function signature
           handleLogin('prolific', pID);
-          console.log('[App] using prolific autologin params', pID, config.STUDY_ID);
-
         } else {
           // Error - Prolific must be used with Firebase
           setIsError(true);
