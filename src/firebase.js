@@ -16,6 +16,9 @@ firebase.initializeApp({
 const db = firebase.firestore();
 // Use emulator if on localhost
 // TODO 173: Refactor to use NODE_ENV
+
+firebase.firestore.setLogLevel('debug');
+
 if (window.location.hostname === 'localhost') db.useEmulator('localhost', 8080);
 
 // Get a reference to the Firebase document at
@@ -56,7 +59,7 @@ async function validateParticipant(participantID, studyID) {
  */
 // TODO 174: Reverse participantID and studyID order
 async function initParticipant(participantID, studyID, startDate) {
-  // console.log('init participant', participantID, studyID, startDate);
+   console.log('init participant', participantID, studyID, startDate);
   try {
     const experiment = getExperimentRef(studyID, participantID, startDate);
     await experiment.set({
@@ -80,14 +83,20 @@ async function initParticipant(participantID, studyID, startDate) {
  * @param {any} data The JsPsych data object from a single trial
  */
 async function addToFirebase(data) {
+  let path = `participant_responses/${data.study_id}/participants/${data.participant_id}/data/${data.start_date}`;
   const studyID = data.study_id;
   const participantID = data.participant_id;
   const startDate = data.start_date;
+
+    console.log(`[firebase.js] addToFirebase: updating ${path} with:`, data);
+
 
   try {
     const experiment = getExperimentRef(studyID, participantID, startDate);
     // await experiment.collection('trials').add(data);
     await experiment.update('results', firebase.firestore.FieldValue.arrayUnion(data));
+    console.log(`[Firestore] addToFirebase: SUCCESS ${path}`);
+
   } catch (error) {
     console.error('Unable to add trial:\n', error);
   }

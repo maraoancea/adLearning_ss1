@@ -10,6 +10,7 @@ import Login from './components/Login';
 import { config, taskVersion, turkUniqueId } from './config/main';
 import { addToFirebase, validateParticipant } from './firebase';
 import { getProlificId } from './lib/utils';
+//import { set } from 'lodash';
 
 /**
  * The top-level React component for Honeycomb. App handles initiating the jsPsych component when the participant
@@ -72,10 +73,13 @@ function App() {
         /* eslint-enable */
       } else if (config.USE_PROLIFIC) {
         const pID = getProlificId();
+        console.log("Prolific ID:", pID);
         if (config.USE_FIREBASE && pID) {
           setMethod('firebase');
           // TODO 145: Function signature
           handleLogin('prolific', pID);
+          console.log('[App] using prolific autologin params', pID, config.STUDY_ID);
+
         } else {
           // Error - Prolific must be used with Firebase
           setIsError(true);
