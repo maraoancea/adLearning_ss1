@@ -98,16 +98,14 @@ function buildTimeline(jsPsych) {
     message: [
       `<img src=${images['logo.png']}>` +
         `<h1>Welcome to the Adaptive Learning Task.</h1>` +
-        `<p>It may take you 60 minutes to finish the task.<br>` +
+        `<p>It may take you ~30 minutes to finish the task.<br>` +
         `Please pay full attention when you do the task.<br>` +
         `Press 'Continue' to enter fullscreen.</p>`,
     ],
     fullscreen_mode: true,
   };
 
-  // Start instructions
-  // note: change at 7 if get rid of more explicit instructions (prob divide up here too if add examples)
-  // run until 5, then run practice block 0
+  //intro instructions
   var instructions1 = {
     type: jsPsychInstructions,
     pages: [
@@ -177,6 +175,119 @@ function buildTimeline(jsPsych) {
       </div>`,
     ],
     show_clickable_nav: 'true',
+    button_label_finish: 'Start Quiz',
+    data: {
+      task_type: 'instructions',
+    },
+  };
+
+  // Start instructions
+  // note: this is for when you loop through them
+  var all_instructions = {
+    type: jsPsychInstructions,
+    pages: [
+      // pg 1
+      `    <div style="width: 960px; margin: auto; text-align: center;">
+      <h1><b>Protect Your City From Zombie</b>s</h1>
+      <img src=${images['intro_city.png']} style="height: 400px; margin-bottom: 20px;">
+      <p style="text-align: left;
+       line-height: 2;">
+        Imagine that we are in the world of a zombie apocalypse. Your city is the only place not yet infected by the zombie 
+        virus.
+        <br>There are <b>multiple groups of zombies</b> attacking your city from <b>different directions</b>.
+        <br><u>Your goal is to set bombs to kill the zombies and defend your city.</u>
+      </p>
+    </div>`,
+      // pg 2
+      `<div style="text-align: center; width: 960px; margin: auto; line-height: 2;">
+      <!-- Two side-by-side images at the top -->
+        <div style="display: flex; justify-content: center; gap: 40px; margin-bottom: 30px;">
+          <img src=${images['taskImg1.png']} style="height: 350px; width: auto;">
+          <img src=${images['bomb_task1.png']} style="height: 350px; width: auto;">
+        </div>
+
+      <!-- Text below the images -->
+      <p style='width: 960px; line-height: 2; text-align: center; font-size: 1.4rem;'>
+        <br>The large circle represents your city. You must <b>set bombs on the perimeter</b> (i.e. on the white) to stop the attacking zombies.
+        <br>You must drag the bomb from the center of your city to the spot on the perimeter where you anticipate the zombie's attack and release your mouse once you have set your position.
+      </p>
+      </div>`,
+      // pg 3
+      `<div><img src=${images['taskImg2_large.png']} style='top:20%; left: 10% ;height:300px;width: 300px'><h1></h1> 
+      <p style='width: 960px;line-height:2;text-align:left'><br>
+      <br>After you set the bomb, the bomb blast area will be displayed in red.
+      <br>Please try to set your bomb as accurately as possible. Note that you have a <b>maximum of 15 seconds</b> to do so.
+      <br>If you do not set a bomb in that time, you will not receive any points for that trial.
+      </div>`,
+      // pg 4
+      `    <div style="text-align:left; width: 960px; margin: auto; line-height:2;">
+  
+    <!-- Image row with labels BELOW images -->
+    <div style="display: flex; justify-content: space-around; align-items: center; margin-bottom: 30px;">
+      <div style="text-align: center;">
+        <img src=${images['taskimg2_bombhit.png']} style="height: 250px;">
+        <div><b>Hit</b></div>
+      </div>  
+      <div style="text-align: center;">
+        <img src=${images['taskImg3_miss.png']} style="height: 250px;">
+        <div><b>Miss</b></div>
+      </div>
+      </div>
+
+    <p style='text-align:left'>
+      <br>You will then see a small circle depicting where the zombies actually attacked.
+      <br>If your red bomb blast region is overlapping with the small circle, you have successfully killed the zombie.
+      <br>Every time you kill a zombie, you will earn one point. If you do not hit the zombie, you will not receive any points for that trial.
+    </p>
+    </div>
+    `,
+      // pg 5
+      `<div><img src=${images['taskImg4_large.png']} style='top:30%; left: 10% ;height:425px;width: auto'>
+
+      <p style='width: 960px;line-height:1.8;text-align:left'>
+      <br>Each group of zombies has a preferred attack location. However, due to their unpredictable clumsiness, <b>they won't always hit the exact same spot.</b>
+      <br> In the picture above, the preferred attack location of the blue zombies is depicted by the <b>dark arrow</b> coming from the smaller circle above the perimeter.
+      <br> The various paths the zombies may stagger down (away from their preferred location) are represented by the arrows, with lighter arrows indicating less likely attack locations.
+      <br><b>Tip:</b> try to find their preferred attack location and place your bomb there.
+      </div>`,
+      //pg 6 , changepoint explanation
+      `<div style="text-align:center">
+       <img src=${images['taskImg5a.png']} style="height:400px;width:auto">
+       <p style="width: 960px;line-height:2;text-align:left">
+         Now, zombies will <b>occasionally redirect their attacks to a completely new location on the perimeter.</b>
+         <br>This will be true for the rest of the task.
+       </p>
+       <p style="font-style:italic;font-size:0.9em;margin-top:10px;">
+         Click “Next” to see a preview of this.
+       </p>
+     </div>`,
+      // page 6b: same text, second example image
+      `<div style="text-align:center">
+       <img src=${images['taskImg5b.png']} style="height:400px;width:auto">
+       <p style="width: 960px;line-height:2;text-align:left">
+         Now, zombies will <b>occasionally redirect their attacks to a completely new location on the perimeter.</b>
+         <br>This will be true for the rest of the task.
+       </p>
+        <p style="font-style:italic;font-size:0.9em;margin-top:10px;">
+         Click “Next” to see a preview of this.
+       </p>
+     </div>`,
+      // page 6c: same text, third example image
+      `<div style="text-align:center">
+        <img src=${images['taskImg5c.png']} style="height:400px;width:auto">
+        <p style="width: 960px;line-height:2;text-align:left">
+         Now, zombies will <b>occasionally redirect their attacks to a completely new location on the perimeter.</b>
+          <br>This will be true for the rest of the task.
+        </p>
+      </div>`,
+      //pg 7, quiz intro
+      `<div style='width: 960px; line-height:2; text-align:left;'>
+        <p> Now, you will be asked a few quiz questions about the instructions again.
+        <br>You will be <b>returned to the beginning</b> of the instructions if you get any incorrect. Please review all instructions now to make sure you understand the task.</p>
+      </div>`,
+    ],
+    show_clickable_nav: 'true',
+    button_label_finish: 'Start Quiz',
     data: {
       task_type: 'instructions',
     },
@@ -189,6 +300,7 @@ function buildTimeline(jsPsych) {
       <p style='width: 960px;line-height:2;text-align:left'>
       <b>Here's a hint:</b> In this round, the zombies preferred attack location is <u> 12 o'clock</u> (shown in image above).
       <i>You should place your bomb here everytime to kill as many zombies as possible! </i>
+      <br><i>If you do not perform well, you will have to repeat this practice round.</i>
       </div>`,
   }; //In order to kill as many zombies as possible, you should place your bomb here everytime!
 
@@ -347,7 +459,7 @@ function buildTimeline(jsPsych) {
         </p>
       </div>`,
       //pg 7 (intro practice)
-      `<div><<img src=${images['zombie.png']} style='top:20%; left: 10% ;height:300px;width:auto'><h1></h1> 
+      `<div><img src=${images['zombie.png']} style='top:20%; left: 10% ;height:300px;width:auto'><h1></h1> 
         <h2>Practice Round 4</h2>
         <p style='width: 960px;line-height:2;text-align:center'><br>
         <br>Similar to the last practice, you will have practice finding the zombie's general attack location, but stay alert:
@@ -398,7 +510,7 @@ function buildTimeline(jsPsych) {
       `<div><p style='width: 960px;line-height:2;text-align:left'>
       Good job completing the practice!
       <br> Lastly, you will be asked a few quiz questions about the instructions.
-      <br> You will be returned to the beginning of the instructions if you answer any question incorrectly.
+      <br> You will be <b>returned to the beginning</b> of the instructions if you answer any question incorrectly.
       </div>`,
     ],
     show_clickable_nav: 'true',
@@ -513,28 +625,6 @@ function buildTimeline(jsPsych) {
     return block_score;
   }
 
-  var instructions2 = {
-    type: jsPsychInstructions,
-    pages: [
-      // pg 6
-      `<div><img src=${images['taskImg5_new.png']} style='top:20%; left: 10% ;height:400px;width: auto'><h1></h1> 
-      <p style='width: 960px;line-height:2;text-align:left'><br>
-      <br>It's also important to note that zombies of the same color will <b>occasionally redirect their attacks to a completely new location.</b>
-      </div>`,
-      `<div style='width: 960px; line-height:2; text-align:left;'>
-        <p> Now, you will be asked a few quiz questions about the instructions again.
-        <br>Please review all instructions now to make sure you understand the task. You will be returned to the instructions if you answer any question incorrectly.</p>
-      </div>`,
-    ],
-    show_clickable_nav: true,
-    button_label_previous: 'Previous',
-    button_label_next: 'Next',
-    button_label_start: 'Start Quiz',
-    data: {
-      task_type: 'instructions',
-    },
-  };
-
   var practice_end = {
     // print scores and end block
     type: Pass,
@@ -559,8 +649,8 @@ function buildTimeline(jsPsych) {
     choices: ['Start'],
     stimulus: `<div><img src=${images['zombie.png']} style='top:20%; left: 10% ;height:300px;width: auto'><h1>Now start protecting your city!</h1>
           <p style='width: 960px;line-height:2;text-align:left'>
-          <br>In the actual task, there will be 3 blocks with 200 trials each.
-          <br>During each of these blocks, there will be <b>either 1, 2, or 3 groups of zombies</b> attacking your city at once.
+          <br>In the actual task, there will be 1 block with 200 trials.
+          <br>During this block, there will be <b>1 group of zombies</b> attacking your city at once.
           <br>Click 'Start' when you are ready to begin!
           </div>`,
   };
@@ -635,7 +725,7 @@ function buildTimeline(jsPsych) {
       },
       // 3. Show instructions only if not all correct and attempts < 3
       {
-        timeline: [instructions1, instructions2],
+        timeline: [all_instructions],
         conditional_function: function () {
           const last_3 = jsPsych.data
             .get()
@@ -692,24 +782,6 @@ function buildTimeline(jsPsych) {
 
   timeline.push(quiz_instruction_reset);
   // add practice end
-
-  /*const exit_after_failures = {
-  timeline: [
-    {
-      type: jsPsychHtmlKeyboardResponse,
-      stimulus: '<h2>❌ You have failed the quiz too many times.</h2><p>Please return your submission. Press any key to exit.</p>',
-      on_finish: function () {
-        window.location.href = 'https://app.prolific.com/submissions/complete?cc=FAILCODE';
-      },
-    },
-  ],
-  conditional_function: function () {
-    return instruction_attempts >= 3;
-  },
-};
-*/
-
-  //timeline.push(exit_after_failures);
 
   // real blocks
   timeline.push(real_task_welcome);

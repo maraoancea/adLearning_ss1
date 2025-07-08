@@ -12,7 +12,7 @@ import jsPsychHtmlButtonResponse from '@jspsych/plugin-html-button-response';
 import { images } from '../lib/utils';
 
 // design
-const n_TrialPerBlock = 10;
+const n_TrialPerBlock = 200; // number of trials per block
 const n_TrialPractice = 25; // FIX THIS !11
 const n_SamePosition = 7;
 const n_MaxJitter = 4; // 7-11, avg of 9
