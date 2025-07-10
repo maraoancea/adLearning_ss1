@@ -78,7 +78,6 @@ const getQueryVariable = (variable) => {
 };
 
 const getProlificId = () => {
-  //const prolificId = getQueryVariable('PROLIFIC_PID');
   const prolificId = getQueryVariable('PROLIFIC_PID');
   return prolificId;
 };
