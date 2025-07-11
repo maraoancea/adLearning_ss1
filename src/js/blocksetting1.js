@@ -136,7 +136,7 @@ function assessPerformance(prediction, outcome) {
   // min distance around the circle in degrees
   let pred_err_min = Math.min(Math.mod(pred_err, 360), Math.mod(-pred_err, 360));
   let hit = 0;
-  if (pred_err_min <= 29) {
+  if (pred_err_min <= 30) {
     console.log('hit');
     hit = 1;
     //jsPsych.data.addDataToLastTrial({ score });
@@ -255,7 +255,7 @@ function practice_block0(timeline, jsPsych) {
         return `<div style= "line-height:1.75;">
         <p>Great job! You got ${totalScore} out of 10 possible points in this block.</p>
         <p style = "text-align: center;">
-        <br>If you place the shield at 12 o'clock every trial, you could hit <b> 8 out of 10 zombies </b>.
+        <br>If you place the shield at 12 o'clock every trial, you could hit <b> 9 out of 10 zombies </b>.
         <br>The zombies stagger around their target area unpredictably, so <u>it is not possible to hit every zombie</u>.
         <br> You can proceed to the next practice.</p></div>`;
       } else {
