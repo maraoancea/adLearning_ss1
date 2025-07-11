@@ -216,7 +216,7 @@ function practice_block0(timeline, jsPsych) {
       on_load: function () {
         $('#shield').toggle(true);
         $('#picker').css('transform', 'rotate(' + prediction + 'deg)');
-        $('#shield').css('transform', 'rotate(' + (prediction + 29) + 'deg) skewX(-30deg)');
+        $('#shield').css('transform', 'rotate(' + (prediction+30) +'deg) skewX(-30deg)');
         $('#counter').text(n_TrialPractice1 + 1 - n);
         $('#picker-circle').css('background-color', colorStyleP);
         $('#pickerOutcome').css('transform', 'rotate(' + outcome + 'deg)');
@@ -343,7 +343,7 @@ function practice_block01(timeline, jsPsych) {
       on_load: function () {
         $('#shield').toggle(true);
         $('#picker').css('transform', 'rotate(' + prediction + 'deg)');
-        $('#shield').css('transform', 'rotate(' + (prediction + 29) + 'deg) skewX(-30deg)');
+        $('#shield').css('transform', 'rotate(' + (prediction + 30) + 'deg) skewX(-30deg)');
         $('#counter').text(n_TrialPractice1 + 1 - n);
         $('#picker-circle').css('background-color', '#ca9161');
         $('#pickerOutcome').css('transform', 'rotate(' + outcome + 'deg)');
@@ -421,7 +421,7 @@ function practice_block02(timeline, jsPsych) {
       on_load: function () {
         $('#shield').toggle(true);
         $('#picker').css('transform', 'rotate(' + prediction + 'deg)');
-        $('#shield').css('transform', 'rotate(' + (prediction + 29) + 'deg) skewX(-30deg)');
+        $('#shield').css('transform', 'rotate(' + (prediction + 30) + 'deg) skewX(-30deg)');
         $('#counter').text(n_TrialPractice2 + 1 - n);
         $('#picker-circle').css('background-color', colorStyleP);
         $('#pickerOutcome').css('transform', 'rotate(' + outcome + 'deg)');
@@ -505,7 +505,7 @@ function practice_block1(timeline, jsPsych) {
       on_load: function () {
         $('#shield').toggle(true);
         $('#picker').css('transform', 'rotate(' + prediction + 'deg)');
-        $('#shield').css('transform', 'rotate(' + (prediction + 29) + 'deg) skewX(-30deg)');
+        $('#shield').css('transform', 'rotate(' + (prediction + 30) + 'deg) skewX(-30deg)');
         $('#counter').text(n_TrialPractice + 1 - n);
         $('#picker-circle').css('background-color', colorStyleP);
         $('#pickerOutcome').css('transform', 'rotate(' + outcome + 'deg)');
@@ -592,7 +592,7 @@ function block1(timeline, jsPsych) {
       on_load: function () {
         $('#shield').toggle(true);
         $('#picker').css('transform', 'rotate(' + prediction + 'deg)');
-        $('#shield').css('transform', 'rotate(' + (prediction + 29) + 'deg) skewX(-30deg)');
+        $('#shield').css('transform', 'rotate(' + (prediction + 30) + 'deg) skewX(-30deg)');
         $('#counter').text(n_TrialPerBlock + 1 - n);
         $('#picker-circle').css('background-color', colorStyle);
         $('#pickerOutcome').css('transform', 'rotate(' + outcome + 'deg)');
