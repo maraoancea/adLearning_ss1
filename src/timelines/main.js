@@ -349,7 +349,7 @@ function buildTimeline(jsPsych) {
       if (blockScore >= 6) {
         return `
       <div style="text-align:center; line-height:2;">
-        <img src=${images['taskImgp01.png']} style="height:400px;width:auto"><br>
+        <img src=${images['taskImgp01_large.png']} style="height:400px;width:auto"><br>
         <p>
           You scored <b>${blockScore} / ${possible}</b> possible points in this block.
          <br>All the actual attack locations are shown in the image above, with the arrow indicating the zombies' preferred attack location.
@@ -359,7 +359,7 @@ function buildTimeline(jsPsych) {
       } else {
         return `
       <div style="text-align:center; line-height:2;">
-        <img src=${images['taskImgp01.png']} style="height:400px;width:auto"><br>
+        <img src=${images['taskImgp01_large.png']} style="height:400px;width:auto"><br>
         <p>
           You scored <b>${blockScore} / ${possible}</b> possible points in this block.
          <br>All the actual attack locations are shown in the image above, with the arrow indicating the preferred attack location.
