@@ -1,12 +1,3 @@
-/*
-
-  Position plugin
-  ----------------------
-
-  Copyright (C) 2019  Jinrui Wei
-
- */
-
 import $ from 'jquery';
 import { ParameterType } from 'jspsych';
 // var Position = (function (jspsych) {

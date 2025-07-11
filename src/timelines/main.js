@@ -10,7 +10,6 @@ import {
   block1,
   practice_block01,
   practice_block02,
-  getPracticeBlock0Timeline,
 } from '../js/blocksetting1';
 import jsPsychFullscreen from '@jspsych/plugin-fullscreen';
 import jsPsychPreload from '@jspsych/plugin-preload';
@@ -508,7 +507,7 @@ var practice01_end = {
     },
     choices: ['Next Block'],
   };
-  const practice0_loop = {
+  /*const practice0_loop = {
     timeline: getPracticeBlock0Timeline(jsPsych),
     loop_function: function (data) {
       // Find the last checkPerformance trial
@@ -517,7 +516,7 @@ var practice01_end = {
       block_start_trial += 10;
       return lastTrial && lastTrial.repeatPractice === true;
     },
-  };
+  };*/
   let quiz_attempts = 0;
 
   const quiz_instruction_reset = {
@@ -599,7 +598,7 @@ var practice01_end = {
   // timeline.push(instruction_and_quiz);
   timeline.push(instructions1);
   timeline.push(practice_instruction1);
-  timeline.push(practice0_loop);
+ // timeline.push(practice0_loop);
   //practice_block0(timeline, jsPsych);
 
 
