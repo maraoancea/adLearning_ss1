@@ -216,7 +216,7 @@ function practice_block0(timeline, jsPsych) {
       on_load: function () {
         $('#shield').toggle(true);
         $('#picker').css('transform', 'rotate(' + prediction + 'deg)');
-        $('#shield').css('transform', 'rotate(' + (prediction+30) +'deg) skewX(-30deg)');
+        $('#shield').css('transform', 'rotate(' + (prediction + 30) + 'deg) skewX(-30deg)');
         $('#counter').text(n_TrialPractice1 + 1 - n);
         $('#picker-circle').css('background-color', colorStyleP);
         $('#pickerOutcome').css('transform', 'rotate(' + outcome + 'deg)');
@@ -338,7 +338,7 @@ function practice_block01(timeline, jsPsych) {
     };
 
     var observe_outcome = {
-      type: Position,  
+      type: Position,
       data: { type: trial_type_label },
       on_load: function () {
         $('#shield').toggle(true);
@@ -362,9 +362,6 @@ function practice_block01(timeline, jsPsych) {
     timeline.push(practice);
   }
 }
-
-
-
 /***
  *practice block n < n_TrialPractice + 1
  */
