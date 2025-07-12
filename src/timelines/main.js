@@ -126,7 +126,7 @@ function buildTimeline(jsPsych) {
       <!-- Two side-by-side images at the top -->
         <div style="display: flex; justify-content: center; gap: 40px; margin-bottom: 30px;">
           <img src=${images['taskImg1.png']} style="height: 350px; width: auto;">
-          <img src=${images['bomb_task1.png']} style="height: 350px; width: auto;">
+          <img src=${images['taskImg1Hit_large.png']} style="height: 350px; width: auto;">
         </div>
 
       <!-- Text below the images -->
@@ -136,7 +136,7 @@ function buildTimeline(jsPsych) {
       </p>
       </div>`,
       // pg 3
-      `<div><img src=${images['taskImg2_large.png']} style='top:20%; left: 10% ;height:300px;width: 300px'><h1></h1> 
+      `<div><img src=${images['taskImg2_large2.png']} style='top:20%; left: 10% ;height:300px;width: auto'><h1></h1> 
       <p style='width: 960px;line-height:2;text-align:left'><br>
       <br>After you set the bomb, the bomb blast area will be displayed in red.
       <br>Please try to set your bomb as accurately as possible. Note that you have a <b>maximum of 15 seconds</b> to do so.
@@ -148,11 +148,11 @@ function buildTimeline(jsPsych) {
     <!-- Image row with labels BELOW images -->
     <div style="display: flex; justify-content: space-around; align-items: center; margin-bottom: 30px;">
       <div style="text-align: center;">
-        <img src=${images['taskimg2_bombhit.png']} style="height: 250px;">
+        <img src=${images['taskImg2_hit_large.png']} style="height: 250px;">
         <div><b>Hit</b></div>
       </div>  
       <div style="text-align: center;">
-        <img src=${images['taskImg3_miss.png']} style="height: 250px;">
+        <img src=${images['taskImg2_miss_large.png']} style="height: 250px;">
         <div><b>Miss</b></div>
       </div>
       </div>
@@ -165,7 +165,7 @@ function buildTimeline(jsPsych) {
     </div>
     `,
       // pg 5
-      `<div><img src=${images['taskImg4_large.png']} style='top:30%; left: 10% ;height:425px;width: auto'>
+      `<div><img src=${images['taskImg4_large2.png']} style='top:30%; left: 10% ;height:425px;width: auto'>
 
       <p style='width: 960px;line-height:1.8;text-align:left'>
       <br>Each group of zombies has a preferred attack location. However, due to their unpredictable clumsiness, <b>they won't always hit the exact same spot.</b>
@@ -203,7 +203,7 @@ function buildTimeline(jsPsych) {
       <!-- Two side-by-side images at the top -->
         <div style="display: flex; justify-content: center; gap: 40px; margin-bottom: 30px;">
           <img src=${images['taskImg1.png']} style="height: 350px; width: auto;">
-          <img src=${images['bomb_task1.png']} style="height: 350px; width: auto;">
+          <img src=${images['taskImg1Hit_large.png']} style="height: 350px; width: auto;">
         </div>
 
       <!-- Text below the images -->
@@ -213,7 +213,7 @@ function buildTimeline(jsPsych) {
       </p>
       </div>`,
       // pg 3
-      `<div><img src=${images['taskImg2_large.png']} style='top:20%; left: 10% ;height:300px;width: 300px'><h1></h1> 
+      `<div><img src=${images['taskImg2_large2.png']} style='top:20%; left: 10% ;height:300px;width: 300px'><h1></h1> 
       <p style='width: 960px;line-height:2;text-align:left'><br>
       <br>After you set the bomb, the bomb blast area will be displayed in red.
       <br>Please try to set your bomb as accurately as possible. Note that you have a <b>maximum of 15 seconds</b> to do so.
@@ -225,11 +225,11 @@ function buildTimeline(jsPsych) {
     <!-- Image row with labels BELOW images -->
     <div style="display: flex; justify-content: space-around; align-items: center; margin-bottom: 30px;">
       <div style="text-align: center;">
-        <img src=${images['taskimg2_bombhit.png']} style="height: 250px;">
+        <img src=${images['taskImg2_hit_large.png']} style="height: 250px;">
         <div><b>Hit</b></div>
       </div>  
       <div style="text-align: center;">
-        <img src=${images['taskImg3_miss.png']} style="height: 250px;">
+        <img src=${images['taskImg2_miss_large.png']} style="height: 250px;">
         <div><b>Miss</b></div>
       </div>
       </div>
@@ -242,7 +242,7 @@ function buildTimeline(jsPsych) {
     </div>
     `,
       // pg 5
-      `<div><img src=${images['taskImg4_large.png']} style='top:30%; left: 10% ;height:425px;width: auto'>
+      `<div><img src=${images['taskImg4_large2.png']} style='top:30%; left: 10% ;height:425px;width: auto'>
 
       <p style='width: 960px;line-height:1.8;text-align:left'>
       <br>Each group of zombies has a preferred attack location. However, due to their unpredictable clumsiness, <b>they won't always hit the exact same spot.</b>
@@ -252,7 +252,7 @@ function buildTimeline(jsPsych) {
       </div>`,
       //pg 6 , changepoint explanation
       `<div style="text-align:center">
-       <img src=${images['taskImg5a.png']} style="height:400px;width:auto">
+       <img src=${images['taskImg5a_large.png']} style="height:400px;width:auto">
        <p style="width: 960px;line-height:2;text-align:left">
          Now, zombies will <b>occasionally redirect their attacks to a completely new location on the perimeter.</b>
          <br>This will be true for the rest of the task.
@@ -346,10 +346,20 @@ function buildTimeline(jsPsych) {
       const nNow = get_n_elapsed_trials();
       const blockScore = get_block_score(block_start_trial, nNow);
       const possible = nNow - block_start_trial;
-      if (blockScore >= 6) {
+      if (blockScore >= 8) {
         return `
       <div style="text-align:center; line-height:2;">
-        <img src=${images['taskImgp01.png']} style="height:400px;width:auto"><br>
+        <img src=${images['taskImgp01_55.png']} style="height:400px;width:auto"><br>
+        <p>
+          You scored <b>${blockScore} / ${possible}</b> possible points in this block.
+         <br>All the actual attack locations are shown in the image above, with the arrow indicating the zombies' preferred attack location.
+         <br>Consistently placing your shield as shown results in capturing the most zombies.
+        </p>
+      </div>`;
+      } else if (blockScore >= 6) {
+        return `
+      <div style="text-align:center; line-height:2;">
+        <img src=${images['taskImgp01_55.png']} style="height:400px;width:auto"><br>
         <p>
           You scored <b>${blockScore} / ${possible}</b> possible points in this block.
          <br>All the actual attack locations are shown in the image above, with the arrow indicating the zombies' preferred attack location.
@@ -359,7 +369,7 @@ function buildTimeline(jsPsych) {
       } else {
         return `
       <div style="text-align:center; line-height:2;">
-        <img src=${images['taskImgp01.png']} style="height:400px;width:auto"><br>
+        <img src=${images['taskImgp01_55.png']} style="height:400px;width:auto"><br>
         <p>
           You scored <b>${blockScore} / ${possible}</b> possible points in this block.
          <br>All the actual attack locations are shown in the image above, with the arrow indicating the preferred attack location.
@@ -429,7 +439,7 @@ function buildTimeline(jsPsych) {
     pages: [
       // pg 6
       `<div style="text-align:center">
-       <img src=${images['taskImg5a.png']} style="height:400px;width:auto">
+       <img src=${images['taskImg5a_large.png']} style="height:400px;width:auto">
        <p style="width: 960px;line-height:2;text-align:left">
          Now, zombies will <b>occasionally redirect their attacks to a completely new location on the perimeter.</b>
          <br>This will be true for the rest of the task.

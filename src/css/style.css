@@ -29,6 +29,8 @@
   background-color: darkgray;
 }
 
+
+
 #shield {
   overflow: hidden;
   position: absolute;
@@ -37,10 +39,28 @@
   width: 50%;
   height: 50%;
   transform-origin: 0% 100%;
-  transform: rotate(345deg) skewX(-40deg);
+  transform: rotate(345deg) skewX(-30deg);
   background-color: #ff5e48;
   display: none;
-}
+}    
+
+
+
+  /* Now you can rotate around the apex with no extra offset */
+  /* e.g. rotate(345deg) skewX(-30deg) or whatever */
+
+/*#shield {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 50%;
+  transform-origin: 0% 100%;
+  transform: rotate(345deg) skewX(-30deg);
+  background-color: #ff5e48;
+  display: none;
+}*/
 
 #center-circle {
   margin: 0;
