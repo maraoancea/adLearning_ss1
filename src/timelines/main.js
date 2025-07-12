@@ -353,7 +353,7 @@ function buildTimeline(jsPsych) {
         <p>
           You scored <b>${blockScore} / ${possible}</b> possible points in this block.
          <br>All the actual attack locations are shown in the image above, with the arrow indicating the zombies' preferred attack location.
-         <br>If you consistently placed your shield as shown, you would have captured <b>9/10</b> zombies in this block.
+         <br>If you consistently placed your shield as shown, you would have captured <b>8/10</b> zombies in this block.
         </p>
       </div>`;
       } else {

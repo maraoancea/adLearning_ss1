@@ -146,7 +146,7 @@ class Click {
         $('#h').toggle(true);
         $('#v').toggle(true);
         $('#shield').toggle(true);
-        shield.style.transform = 'rotate(' + (angle + 30) + 'deg) skewX(-30deg)';
+        shield.style.transform = 'rotate(' + (angle + 27.5) + 'deg) skewX(-35deg)';
         picker.style.transform = 'rotate(' + angle + 'deg)';
 
         // clear listeners
