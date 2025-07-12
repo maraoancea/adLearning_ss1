@@ -431,7 +431,8 @@ function buildTimeline(jsPsych) {
       `<div style="text-align:center">
        <img src=${images['taskImg5a.png']} style="height:400px;width:auto">
        <p style="width: 960px;line-height:2;text-align:left">
-         Now, zombies will <b>occasionally redirect their attacks to a completely new location on the perimeter.</b>
+         IMPORTANT: From now on, zombies will redirect their attacks to a completely new location on the perimeter around every <b>9</b> attacks.
+         <br>This frequency will fluctuate throughout the task, so stay alert and prepared to adjust your bomb placement.
          <br>This will be true for the rest of the task.
        </p>
        <p style="font-style:italic;font-size:0.9em;margin-top:10px;">
@@ -443,7 +444,8 @@ function buildTimeline(jsPsych) {
       `<div style="text-align:center">
        <img src=${images['taskImg5b.png']} style="height:400px;width:auto">
        <p style="width: 960px;line-height:2;text-align:left">
-         Now, zombies will <b>occasionally redirect their attacks to a completely new location on the perimeter.</b>
+        IMPORTANT: From now on, zombies will redirect their attacks to a completely new location on the perimeter around every <b>9</b> attacks.
+         <br>This frequency will fluctuate throughout the task, so stay alert and prepared to adjust your bomb placement.
          <br>This will be true for the rest of the task.
        </p>
         <p style="font-style:italic;font-size:0.9em;margin-top:10px;">
@@ -454,8 +456,9 @@ function buildTimeline(jsPsych) {
       `<div style="text-align:center">
         <img src=${images['taskImg5c.png']} style="height:400px;width:auto">
         <p style="width: 960px;line-height:2;text-align:left">
-         Now, zombies will <b>occasionally redirect their attacks to a completely new location on the perimeter.</b>
-          <br>This will be true for the rest of the task.
+          IMPORTANT: From now on, zombies will redirect their attacks to a completely new location on the perimeter around every <b>9</b> attacks.
+         <br>This frequency will fluctuate throughout the task, so stay alert and prepared to adjust your bomb placement.
+         <br>This will be true for the rest of the task.
         </p>
       </div>`,
       //pg 7 (intro practice)
