@@ -348,7 +348,17 @@ function buildTimeline(jsPsych) {
       const nNow = get_n_elapsed_trials();
       const blockScore = get_block_score(block_start_trial, nNow);
       const possible = nNow - block_start_trial;
-      if (blockScore >= 6) {
+      if (blockScore >= 8) {
+        return `
+      <div style="text-align:center; line-height:2;">
+        <img src=${images['taskImgp01.png']} style="height:400px;width:auto"><br>
+        <p>
+          You scored <b>${blockScore} / ${possible}</b> possible points in this block.
+         <br>All the actual attack locations are shown in the image above, with the arrow indicating the zombies' preferred attack location.
+         <br>Consistently placing your shield as shown (around 7 o'clock) captured the most zombies in this block.
+        </p>
+      </div>`;
+      } else if (blockScore >= 6) {
         return `
       <div style="text-align:center; line-height:2;">
         <img src=${images['taskImgp01.png']} style="height:400px;width:auto"><br>
