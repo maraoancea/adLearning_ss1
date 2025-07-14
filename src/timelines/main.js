@@ -243,7 +243,6 @@ function buildTimeline(jsPsych) {
     `,
       // pg 5
       `<div><img src=${images['taskImg4_large.png']} style='top:30%; left: 10% ;height:425px;width: auto'>
-
       <p style='width: 960px;line-height:1.8;text-align:left'>
       <br>Each group of zombies has a preferred attack location. However, due to their unpredictable clumsiness, <b>they won't always hit the exact same spot.</b>
       <br> In the picture above, the preferred attack location of the blue zombies is depicted by the <b>dark arrow</b> coming from the smaller circle above the perimeter.
@@ -254,7 +253,8 @@ function buildTimeline(jsPsych) {
       `<div style="text-align:center">
        <img src=${images['taskImg5a.png']} style="height:400px;width:auto">
        <p style="width: 960px;line-height:2;text-align:left">
-         Now, zombies will <b>occasionally redirect their attacks to a completely new location on the perimeter.</b>
+          From now on, zombies will <b>occasionally redirect their attacks to a completely new location</b> on the perimeter.
+         <br>You will not be able to predict exactly when the zombies will change their attack location, but it should happen <b>every 7-11 trials</b> or so.
          <br>This will be true for the rest of the task.
        </p>
        <p style="font-style:italic;font-size:0.9em;margin-top:10px;">
@@ -264,10 +264,11 @@ function buildTimeline(jsPsych) {
       // page 6b: same text, second example image
       `<div style="text-align:center">
        <img src=${images['taskImg5b.png']} style="height:400px;width:auto">
-       <p style="width: 960px;line-height:2;text-align:left">
-         Now, zombies will <b>occasionally redirect their attacks to a completely new location on the perimeter.</b>
+        <p style="width: 960px;line-height:2;text-align:left">
+         From now on, zombies will <b>occasionally redirect their attacks to a completely new location</b> on the perimeter.
+         <br>You will not be able to predict exactly when the zombies will change their attack location, but it should happen <b>every 7-11 trials</b> or so.
          <br>This will be true for the rest of the task.
-       </p>
+        </p>
         <p style="font-style:italic;font-size:0.9em;margin-top:10px;">
          Click “Next” to see a preview of this.
        </p>
@@ -276,8 +277,9 @@ function buildTimeline(jsPsych) {
       `<div style="text-align:center">
         <img src=${images['taskImg5c.png']} style="height:400px;width:auto">
         <p style="width: 960px;line-height:2;text-align:left">
-         Now, zombies will <b>occasionally redirect their attacks to a completely new location on the perimeter.</b>
-          <br>This will be true for the rest of the task.
+          From now on, zombies will <b>occasionally redirect their attacks to a completely new location</b> on the perimeter.
+         <br>You will not be able to predict exactly when the zombies will change their attack location, but it should happen <b>every 7-11 trials</b> or so.
+         <br>This will be true for the rest of the task.
         </p>
       </div>`,
       //pg 7, quiz intro
@@ -431,8 +433,8 @@ function buildTimeline(jsPsych) {
       `<div style="text-align:center">
        <img src=${images['taskImg5a.png']} style="height:400px;width:auto">
        <p style="width: 960px;line-height:2;text-align:left">
-         IMPORTANT: From now on, zombies will redirect their attacks to a completely new location on the perimeter around every <b>9</b> attacks.
-         <br>This frequency will fluctuate throughout the task, so stay alert and prepared to adjust your bomb placement.
+          From now on, zombies will <b>occasionally redirect their attacks to a completely new location</b> on the perimeter.
+         <br>You will not be able to predict exactly when the zombies will change their attack location, but it should happen <b>every 7-11 trials</b> or so.
          <br>This will be true for the rest of the task.
        </p>
        <p style="font-style:italic;font-size:0.9em;margin-top:10px;">
@@ -444,8 +446,8 @@ function buildTimeline(jsPsych) {
       `<div style="text-align:center">
        <img src=${images['taskImg5b.png']} style="height:400px;width:auto">
        <p style="width: 960px;line-height:2;text-align:left">
-        IMPORTANT: From now on, zombies will redirect their attacks to a completely new location on the perimeter around every <b>9</b> attacks.
-         <br>This frequency will fluctuate throughout the task, so stay alert and prepared to adjust your bomb placement.
+          From now on, zombies will <b>occasionally redirect their attacks to a completely new location</b> on the perimeter.
+         <br>You will not be able to predict exactly when the zombies will change their attack location, but it should happen <b>every 7-11 trials</b> or so.
          <br>This will be true for the rest of the task.
        </p>
         <p style="font-style:italic;font-size:0.9em;margin-top:10px;">
@@ -456,8 +458,8 @@ function buildTimeline(jsPsych) {
       `<div style="text-align:center">
         <img src=${images['taskImg5c.png']} style="height:400px;width:auto">
         <p style="width: 960px;line-height:2;text-align:left">
-          IMPORTANT: From now on, zombies will redirect their attacks to a completely new location on the perimeter around every <b>9</b> attacks.
-         <br>This frequency will fluctuate throughout the task, so stay alert and prepared to adjust your bomb placement.
+          From now on, zombies will <b>occasionally redirect their attacks to a completely new location</b> on the perimeter.
+         <br>You will not be able to predict exactly when the zombies will change their attack location, but it should happen <b>every 7-11 trials</b> or so.
          <br>This will be true for the rest of the task.
         </p>
       </div>`,
@@ -540,7 +542,7 @@ function buildTimeline(jsPsych) {
    */
   var questions = [
     '<b>What will you do in this task?</b>',
-    '<b>What does the red shaded area represent after placing your bomb? </b>',
+    '<b>Around how often will zombies completely redirect their attack location?</b>',
     '<b>How will zombies attack?</b>',
   ];
 
@@ -552,10 +554,10 @@ function buildTimeline(jsPsych) {
   ];
 
   var check2_opts = [
-    "The zombies' possible paths",
-    "The bomb's blast zone",
-    'The safe zone',
-    "It's just a decoration",
+    'They never change their attack location',
+    'Around every 7-11 attacks',
+    'Every attack is completely random',
+    'Every 3-5 attacks',
   ];
   var check3_opts = [
     'They will usually attack around the same location',
